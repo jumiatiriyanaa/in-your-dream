@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\User;
+use App\Models\AboutUs;
+use App\Models\Gallery;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        return view('admin.dashboard');
+        $totalGalleries = Gallery::count();
+        $totalUsersLevel0 = User::where('level', 0)->count();
+        $totalAboutUs = AboutUs::count();
+
+        return view('admin.dashboard', compact('totalGalleries', 'totalUsersLevel0', 'totalAboutUs'));
     }
 }

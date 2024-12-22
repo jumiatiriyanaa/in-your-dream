@@ -72,7 +72,7 @@
                                         <i class="bi bi-image"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6></h6>
+                                        <h6>{{ $totalGalleries }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -112,7 +112,7 @@
                                         <i class="bi bi-person-gear"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6></h6>
+                                        <h6>{{ $totalUsersLevel0 }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -132,7 +132,7 @@
                                         <i class="bi bi-info-circle"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6></h6>
+                                        <h6>{{ $totalAboutUs }}</h6>
                                     </div>
                                 </div>
                             </div>

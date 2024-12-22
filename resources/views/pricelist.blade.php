@@ -173,7 +173,7 @@
                     <div class="row g-0">
                         <div class="col-lg-4 col-md-6">
                             <div class="service-item">
-                                <span class="number">01</span>
+                                <span class="number"><span class="text-white">01</span></span>
                                 <h3 class="text-center mb-4">Photobox / Self Photo</h3>
                                 <div class="container text-center">
                                     <img src="{{ asset('guest/img/photobox.png') }}" alt="" width="100">
@@ -189,7 +189,7 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="service-item">
                                 <h3 class="text-center mb-4">Wedding Package</h3>
-                                <span class="number">02</span>
+                                <span class="number"><span class="text-white">02</span></span>
                                 <div class="container text-center">
                                     <img src="{{ asset('guest/img/wedding.svg') }}" alt="" width="100">
                                 </div>
@@ -205,7 +205,7 @@
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="service-item">
-                                <span class="number">03</span>
+                                <span class="number"><span class="text-white">03</span></span>
                                 <h3 class="text-center mb-4">Order Package</h3>
                                 <div class="container text-center">
                                     <img src="{{ asset('guest/img/order.png') }}" alt="" width="100">
