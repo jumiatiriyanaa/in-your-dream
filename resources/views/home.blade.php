@@ -1,6 +1,6 @@
 @extends('layouts.user')
 
-@section('title', 'Home')
+@section('title', 'From Candid Smiles to Perfect Poses, We Frame Your Unique Story')
 
 @section('content')
     <main class="main">
