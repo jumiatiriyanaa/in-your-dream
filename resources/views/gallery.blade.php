@@ -6,7 +6,7 @@
     <main class="main">
         <!-- Page Title -->
         <div class="page-title dark-background" data-aos="fade"
-            style="background-image: url('{{ asset('assets/img/studio-background.png') }}');">
+            style="background-image: url('{{ asset('img/studio-background.png') }}');">
             <div class="container position-relative">
                 <h1>Gallery</h1>
                 <p>

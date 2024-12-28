@@ -83,10 +83,10 @@
                     <div class="col-lg-4 col-md-3 footer-links">
                         <h4>Useful Links</h4>
                         <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">About us</a></li>
-                            <li><a href="#">Gallery</a></li>
-                            <li><a href="#">Pricelist</a></li>
+                            <li><a href="/home">Home</a></li>
+                            <li><a href="/home#about">About us</a></li>
+                            <li><a href="/gallery">Gallery</a></li>
+                            <li><a href="/pricelist">Pricelist</a></li>
                         </ul>
                     </div>
 
