@@ -25,79 +25,72 @@
     <link href="{{ asset('guest/css/main.css') }}" rel="stylesheet" />
     <!-- My CSS -->
     <style>
-        /* Filter Buttons */
-        .filter-buttons {
+        body {
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .container {
+            max-width: 800px;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+
+        .order-summary {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .order-summary h5 {
+            font-weight: bold;
             margin-bottom: 20px;
         }
 
-        .btn-filter {
-            background-color: transparent;
-            color: #000;
-            border: 1px solid #ccc;
-            border-radius: 20px;
-            padding: 8px 16px;
-            margin: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .total-payment {
+            font-size: 20px;
+            font-weight: bold;
         }
 
-        .btn-filter.active,
-        .btn-filter:hover {
-            background-color: #807a49;
+        .btn-booking {
+            background-color: #000;
             color: #fff;
-            border-color: #807a49;
-        }
-
-        /* Gallery Grid */
-        .gallery-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .gallery-item {
-            text-align: center;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .gallery-card {
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .gallery-image {
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 8px;
             width: 100%;
-            height: auto;
-            transition: transform 0.3s ease-in-out;
         }
 
-        .gallery-card:hover .gallery-image {
-            transform: scale(1.1);
+        .btn-booking:hover {
+            background-color: #444;
         }
 
-        .gallery-info {
-            background: rgba(0, 0, 0, 0.6);
-            color: #fff;
-            padding: 10px;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            text-align: center;
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
         }
 
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .gallery-item {
-                flex: 0 0 48%;
-            }
+        .section-title {
+            font-size: 24px;
+            font-weight: bold;
         }
 
-        @media (max-width: 576px) {
-            .gallery-item {
-                flex: 0 0 100%;
-            }
+        .form-label {
+            font-weight: 600;
+        }
+
+        .form-control,
+        .form-select {
+            border-radius: 8px;
         }
     </style>
 </head>
@@ -142,61 +135,7 @@
         </div>
     </header>
 
-    <main class="main">
-        <!-- Page Title -->
-        <div class="page-title dark-background" data-aos="fade"
-            style="background-image: url('{{ asset('assets/img/studio-background.png') }}');">
-            <div class="container position-relative">
-                <h1>Gallery</h1>
-                <p>
-                    Home
-                    /
-                    Gallery
-                </p>
-                <nav class="breadcrumbs">
-                    <ol>
-                        <li><a href="/">Home</a></li>
-                        <li class="current">Gallery</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-        <!-- End Page Title -->
-
-        <!-- Services Section -->
-        <section class="gallery-section">
-            <div class="container">
-                <!-- Filter Buttons -->
-                <div class="filter-buttons text-center mb-4">
-                    <button class="btn btn-filter active" data-filter="all">All</button>
-                    @foreach ($galleries->pluck('package.name')->unique() as $category)
-                        <button class="btn btn-filter"
-                            data-filter="{{ strtolower(str_replace(' ', '-', $category)) }}">
-                            {{ $category }}
-                        </button>
-                    @endforeach
-                </div>
-
-                <!-- Gallery Grid -->
-                <div class="row gallery-grid">
-                    @foreach ($galleries as $gallery)
-                        <div
-                            class="col-lg-3 col-md-4 col-sm-6 gallery-item {{ strtolower(str_replace(' ', '-', $gallery->package->name)) }}">
-                            <div class="gallery-card">
-                                <img src="{{ asset('storage/' . $gallery->image_path) }}"
-                                    class="img-fluid gallery-image" alt="Gallery Image">
-                                {{-- <div class="gallery-info">
-                                    <h5 class="gallery-title">{{ $gallery->package->name }}</h5>
-                                    <p class="gallery-date">{{ $gallery->created_at->format('d M Y') }}</p>
-                                </div> --}}
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </section>
-        <!-- /Services Section -->
-    </main>
+    @yield('content')
 
     <footer id="footer" class="footer dark-background">
         <div class="footer-top">
@@ -263,25 +202,26 @@
     <script src="{{ asset('guest/js/main.js') }}"></script>
     <!-- My JS -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const filterButtons = document.querySelectorAll('.btn-filter');
-            const galleryItems = document.querySelectorAll('.gallery-item');
+        document.addEventListener("DOMContentLoaded", function() {
+            const numberOfFriendsInput = document.getElementById("number_of_friends");
+            const totalPaymentInput = document.querySelector("input[name='total_payment']");
+            const basePrice = 60000;
+            const additionalCostPerPerson = 15000;
+            const adminFee = 2000;
 
-            filterButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
+            numberOfFriendsInput.addEventListener("input", function() {
+                const numberOfFriends = parseInt(numberOfFriendsInput.value) || 0;
+                let additionalCost = 0;
 
-                    const filter = button.getAttribute('data-filter');
+                if (numberOfFriends > 4) {
+                    additionalCost = (numberOfFriends - 4) * additionalCostPerPerson;
+                }
 
-                    galleryItems.forEach(item => {
-                        if (filter === 'all' || item.classList.contains(filter)) {
-                            item.style.display = 'block';
-                        } else {
-                            item.style.display = 'none';
-                        }
-                    });
-                });
+                const totalPayment = basePrice + additionalCost + adminFee;
+                totalPaymentInput.value = totalPayment;
+
+                document.getElementById("display-total").textContent =
+                    `Rp${totalPayment.toLocaleString('id-ID')}`;
             });
         });
     </script>

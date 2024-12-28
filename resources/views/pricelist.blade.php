@@ -26,27 +26,21 @@
     <style>
         .service-item {
             background-color: #fff;
-            /* Warna putih untuk latar belakang */
             padding: 20px;
             margin: 10px;
             border-radius: 10px;
-            /* Sudut membulat */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            /* Bayangan */
             text-align: center;
             transition: transform 0.3s ease-in-out;
-            /* Animasi saat hover */
         }
 
         .service-item:hover {
             transform: scale(1.05);
-            /* Perbesar sedikit saat hover */
         }
 
         .service-item .number {
             display: inline-block;
             background-color: #807a49;
-            /* Warna latar belakang angka */
             color: #fff;
             font-size: 1.5rem;
             font-weight: bold;
@@ -59,7 +53,6 @@
 
         .service-item img {
             max-width: 100px;
-            /* Atur lebar maksimal gambar */
             margin: 10px auto;
         }
 
