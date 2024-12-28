@@ -153,12 +153,12 @@
             </li>
 
             <!-- Studio -->
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link collapsed" href="">
                     <i class="bi bi-camera"></i>
                     <span>Studio</span>
                 </a>
-            </li>
+            </li> --}}
 
             <!-- Gallery -->
             <li class="nav-item">

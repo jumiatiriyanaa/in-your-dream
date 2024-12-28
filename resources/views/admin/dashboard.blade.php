@@ -41,7 +41,7 @@
                     <!-- End Reservasi Card -->
 
                     <!-- Studio Card -->
-                    <div class="col-xxl-4 col-md-6">
+                    {{-- <div class="col-xxl-4 col-md-6">
                         <div class="card info-card revenue-card">
                             <div class="card-body">
                                 <h5 class="card-title">
@@ -57,7 +57,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <!-- End Studio Card -->
 
                     <!-- Gallery Card -->
@@ -92,7 +92,7 @@
                                         <i class="bi bi-plus-square"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6></h6>
+                                        <h6>{{ $totalPackages }}</h6>
                                     </div>
                                 </div>
                             </div>

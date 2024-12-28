@@ -4,12 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\WeddingController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\Admin\DashboardController;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use App\Http\Controllers\SelfPhotoPhotoboxController;
 use App\Http\Controllers\Admin\AboutUsManagementController;
 use App\Http\Controllers\Admin\GalleryManagementController;
 use App\Http\Controllers\Admin\PhotographerManagementController;
+use App\Http\Controllers\Admin\SelfPhotoPhotoboxManagementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +23,11 @@ use App\Http\Controllers\Admin\PhotographerManagementController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/selfphoto', [SelfPhotoPhotoboxManagementController::class, 'index'])->name('selfphoto.index');
+    Route::delete('/selfphoto/{id}', [SelfPhotoPhotoboxManagementController::class, 'destroy'])->name('selfphoto.destroy');
+});
 
 Route::get('/', function () {
     return view('landing-page');
@@ -58,4 +65,16 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::resource('galleries', GalleryManagementController::class);
     Route::resource('about-us', AboutUsManagementController::class);
     Route::resource('photographers', PhotographerManagementController::class)->except(['show']);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/selfphoto', [SelfPhotoPhotoboxController::class, 'create'])->name('selfphoto.create');
+    Route::post('/selfphoto/store', [SelfPhotoPhotoboxController::class, 'store'])->name('selfphoto.store');
+    Route::get('/selfphoto/resi/{id}', [SelfPhotoPhotoboxController::class, 'showResi'])->name('selfphoto.resi');
+    Route::post('/selfphoto/confirm/{id}', [SelfPhotoPhotoboxController::class, 'confirm'])->name('selfphoto.confirm');
+
+    Route::get('/weddings', [WeddingController::class, 'create'])->name('weddings.create');
+    Route::post('/weddings/store', [WeddingController::class, 'store'])->name('weddings.store');
+    Route::get('/weddings/resi/{id}', [WeddingController::class, 'showResi'])->name('weddings.resi');
+    Route::post('/weddings/confirm/{id}', [WeddingController::class, 'confirm'])->name('weddings.confirm');
 });
