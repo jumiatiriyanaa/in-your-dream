@@ -11,7 +11,7 @@ Pastikan Anda telah menginstal [Composer](https://getcomposer.org/) di sistem An
 **1.** Clone repositori proyek Laravel Anda ke direktori lokal:
 
 ```bash
-git clone https://github.com/ramadhanabelio/in-your-dream.git
+git clone https://github.com/jumiatiriyanaa/in-your-dream.git
 ```
 
 **2.** Masuk ke direktori proyek:
@@ -82,5 +82,5 @@ Setelah mengikuti langkah-langkah di atas, proyek Laravel Anda kini siap digunak
 
 Login Admin:
 
-Email : bimonugraha@gmail.com
-Password : bimbimoo
+-   Email : bimonugraha@gmail.com
+-   Password : bimbimoo
