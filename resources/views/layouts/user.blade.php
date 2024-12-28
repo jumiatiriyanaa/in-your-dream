@@ -29,10 +29,161 @@
             font-family: 'Open Sans', sans-serif;
         }
 
-        .container {
-            max-width: 800px;
+        /* Pricelist */
+        .service-item-card {
+            background-color: #fff;
+            padding: 20px;
+            margin: 10px;
+            position: relative;
+            padding-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
         }
 
+        .service-item-card:hover {
+            transform: scale(1.05);
+        }
+
+        .service-item-card .number {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #807a49;
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: bold;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .service-item-card img {
+            max-width: 100px;
+            margin: 10px auto;
+        }
+
+        .service-item-card h3 {
+            font-size: 1.2rem;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .service-item-card-content {
+            font-size: 0.95rem;
+            color: #555;
+            text-align: left;
+            list-style: none;
+            padding: 0;
+        }
+
+        .service-item-card-content li {
+            margin-bottom: 5px;
+            line-height: 1.6;
+        }
+
+        .service-item-card-content ul {
+            padding-left: 20px;
+        }
+
+        .service-item-card .btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 20px;
+            background-color: #807a49;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .service-item-card .btn:hover {
+            background-color: #555;
+        }
+
+        /* Gallery */
+        /* Filter Buttons */
+        .filter-buttons {
+            margin-bottom: 20px;
+        }
+
+        .btn-filter {
+            background-color: transparent;
+            color: #000;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            padding: 8px 16px;
+            margin: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-filter.active,
+        .btn-filter:hover {
+            background-color: #807a49;
+            color: #fff;
+            border-color: #807a49;
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .gallery-item {
+            text-align: center;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .gallery-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .gallery-card:hover .gallery-image {
+            transform: scale(1.1);
+        }
+
+        .gallery-info {
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            padding: 10px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .gallery-item {
+                flex: 0 0 48%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .gallery-item {
+                flex: 0 0 100%;
+            }
+        }
+
+        /* Order Form Packages */
         .card {
             border: none;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -202,6 +353,30 @@
     <script src="{{ asset('guest/js/main.js') }}"></script>
     <!-- My JS -->
     <script>
+        // Gallery
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterButtons = document.querySelectorAll('.btn-filter');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    const filter = button.getAttribute('data-filter');
+
+                    galleryItems.forEach(item => {
+                        if (filter === 'all' || item.classList.contains(filter)) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+
+        // Order Form Packages
         document.addEventListener("DOMContentLoaded", function() {
             const numberOfFriendsInput = document.getElementById("number_of_friends");
             const totalPaymentInput = document.querySelector("input[name='total_payment']");
