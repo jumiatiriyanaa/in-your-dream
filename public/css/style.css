@@ -2,8 +2,16 @@ body {
     font-family: "Open Sans", sans-serif;
 }
 
+.row.g-0 {
+    align-items: stretch;
+}
+
 /* Pricelist */
 .service-item-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
     background-color: #fff;
     padding: 20px;
     margin: 10px;
