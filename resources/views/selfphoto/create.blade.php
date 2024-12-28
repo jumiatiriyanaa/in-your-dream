@@ -121,7 +121,8 @@
                         <input type="radio" class="btn-check" name="background_choice" id="background1"
                             value="Green Photobox" required>
                         <label class="btn btn-outline-secondary w-100 border-0" for="background1">
-                            <img src="{{ asset('img/green.png') }}" class="img-fluid rounded mb-2"
+                            <img src="{{ asset('img/green.png') }}"
+                                style="width: 300px; height: 300px; object-fit: cover;" class="img-fluid rounded mb-2"
                                 alt="Green Photobox">
                             <b class="mt-5">Green Photobox</b> <br>
                             <span>Background Gratis</span>
@@ -131,7 +132,9 @@
                         <input type="radio" class="btn-check" name="background_choice" id="background2"
                             value="Red Photobox" required>
                         <label class="btn btn-outline-secondary w-100 border-0" for="background2">
-                            <img src="{{ asset('img/red.png') }}" class="img-fluid rounded mb-2" alt="Red Photobox">
+                            <img src="{{ asset('img/red.png') }}"
+                                style="width: 300px; height: 300px; object-fit: cover;" class="img-fluid rounded mb-2"
+                                alt="Red Photobox">
                             <b class="mt-5">Red Photobox</b> <br>
                             <span>Background Gratis</span>
                         </label>
@@ -140,7 +143,8 @@
                         <input type="radio" class="btn-check" name="background_choice" id="background3"
                             value="Abstract 1" required>
                         <label class="btn btn-outline-secondary w-100 border-0" for="background3">
-                            <img src="{{ asset('img/abstract1.png') }}" class="img-fluid rounded mb-2"
+                            <img src="{{ asset('img/abstract1.jpg') }}"
+                                style="width: 300px; height: 300px; object-fit: cover;" class="img-fluid rounded mb-2"
                                 alt="Abstract 1">
                             <b class="mt-5">Abstract 1</b> <br>
                             <span>Background Gratis</span>
@@ -150,13 +154,14 @@
                         <input type="radio" class="btn-check" name="background_choice" id="background4"
                             value="Abstract 2" required>
                         <label class="btn btn-outline-secondary w-100 border-0" for="background4">
-                            <img src="{{ asset('img/abstract2.png') }}" class="img-fluid rounded mb-2"
+                            <img src="{{ asset('img/abstract2.jpg') }}"
+                                style="width: 300px; height: 300px; object-fit: cover;" class="img-fluid rounded mb-2"
                                 alt="Abstract 2">
                             <b class="mt-5">Abstract 2</b> <br>
                             <span>Background Gratis</span>
                         </label>
                     </div>
-                    <div class="col-md-3">
+                    {{-- <div class="col-md-3">
                         <input type="radio" class="btn-check" name="background_choice" id="background5"
                             value="Putih Photobox" required>
                         <label class="btn btn-outline-secondary w-100 border-0" for="background5">
@@ -195,13 +200,14 @@
                             <b class="mt-5">Kuning Photobox</b> <br>
                             <span>Background Gratis</span>
                         </label>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
 
             <div class="col-md-12">
-                <label for="number_of_friends" class="form-label">Jumlah Teman</label>
-                <input type="number" class="form-control" id="number_of_friends" name="number_of_friends" required>
+                <label for="number_of_friends" class="form-label">Estimasi Membawa Teman</label>
+                <input type="number" class="form-control" id="number_of_friends" name="number_of_friends"
+                    min="1" required>
             </div>
 
             <div class="col-md-12">
