@@ -199,7 +199,7 @@
             </li>
 
             <!-- Heading -->
-            <li class="nav-heading">Reservasi</li>
+            <li class="nav-heading">Studio</li>
 
             <!-- Selfphoto / Photobox -->
             <li class="nav-item">
