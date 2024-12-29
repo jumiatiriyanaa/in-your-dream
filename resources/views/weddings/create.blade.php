@@ -83,6 +83,7 @@
             <div class="col-md-12">
                 <label for="payment_method" class="form-label">Metode Pembayaran</label>
                 <select id="payment_method" name="payment_method" class="form-select">
+                    <option value="" disabled selected>Pilih Metode Pembayaran</option>
                     <option value="Transfer">Transfer</option>
                     <option value="Cash">Cash</option>
                 </select>

@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\WeddingController;
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\OtherPackageController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\SelfPhotoPhotoboxController;
 use App\Http\Controllers\Admin\AboutUsManagementController;
@@ -68,13 +69,18 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/selfphoto', [SelfPhotoPhotoboxController::class, 'create'])->name('selfphoto.create');
-    Route::post('/selfphoto/store', [SelfPhotoPhotoboxController::class, 'store'])->name('selfphoto.store');
-    Route::get('/selfphoto/resi/{id}', [SelfPhotoPhotoboxController::class, 'showResi'])->name('selfphoto.resi');
-    Route::post('/selfphoto/confirm/{id}', [SelfPhotoPhotoboxController::class, 'confirm'])->name('selfphoto.confirm');
+    Route::get('selfphoto', [SelfPhotoPhotoboxController::class, 'create'])->name('selfphoto.create');
+    Route::post('selfphoto/store', [SelfPhotoPhotoboxController::class, 'store'])->name('selfphoto.store');
+    Route::get('selfphoto/resi/{id}', [SelfPhotoPhotoboxController::class, 'showResi'])->name('selfphoto.resi');
+    Route::post('selfphoto/confirm/{id}', [SelfPhotoPhotoboxController::class, 'confirm'])->name('selfphoto.confirm');
 
-    Route::get('/weddings', [WeddingController::class, 'create'])->name('weddings.create');
-    Route::post('/weddings/store', [WeddingController::class, 'store'])->name('weddings.store');
-    Route::get('/weddings/resi/{id}', [WeddingController::class, 'showResi'])->name('weddings.resi');
-    Route::post('/weddings/confirm/{id}', [WeddingController::class, 'confirm'])->name('weddings.confirm');
+    Route::get('weddings', [WeddingController::class, 'create'])->name('weddings.create');
+    Route::post('weddings/store', [WeddingController::class, 'store'])->name('weddings.store');
+    Route::get('weddings/resi/{id}', [WeddingController::class, 'showResi'])->name('weddings.resi');
+    Route::post('weddings/confirm/{id}', [WeddingController::class, 'confirm'])->name('weddings.confirm');
+
+    Route::get('other-package', [OtherPackageController::class, 'create'])->name('other-package.create');
+    Route::post('other-package/store', [OtherPackageController::class, 'store'])->name('other-package.store');
+    Route::get('other-package/resi/{id}', [OtherPackageController::class, 'showResi'])->name('other-package.resi');
+    Route::post('other-package/confirm/{id}', [OtherPackageController::class, 'confirm'])->name('other-package.confirm');
 });

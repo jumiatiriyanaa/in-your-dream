@@ -66,30 +66,32 @@
                             </a>
                         </div>
                         <div class="col-lg-4 col-md-6">
-                            <div class="service-item-card">
-                                <span class="number"><span class="text-white">03</span></span>
-                                <h3 class="text-center mb-4">Order Package</h3>
-                                <div class="container text-center">
-                                    <img src="{{ asset('guest/img/order.png') }}" alt="" width="100">
+                            <a href="{{ url('/other-package') }}" style="text-decoration: none; color: inherit;">
+                                <div class="service-item-card">
+                                    <span class="number"><span class="text-white">03</span></span>
+                                    <h3 class="text-center mb-4">Other Package</h3>
+                                    <div class="container text-center">
+                                        <img src="{{ asset('guest/img/order.png') }}" alt="" width="100">
+                                    </div>
+                                    <div class="service-item-card-content mt-3">
+                                        <ul>
+                                            <li>1 hari sesi</li>
+                                            <li>Starting from [100k]</li>
+                                            <li>
+                                                Tersedia Paket:
+                                                <ul>
+                                                    <li>Wisuda</li>
+                                                    <li>Ulang Tahun</li>
+                                                    <li>Prewedding</li>
+                                                    <li>Tunangan</li>
+                                                    <li>Akikah</li>
+                                                    <li>Dan event harian lainnya</li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="service-item-card-content mt-3">
-                                    <ul>
-                                        <li>1 hari sesi</li>
-                                        <li>Starting from [100k]</li>
-                                        <li>
-                                            Tersedia Paket:
-                                            <ul>
-                                                <li>Wisuda</li>
-                                                <li>Ulang Tahun</li>
-                                                <li>Pre Wedding</li>
-                                                <li>Tunangan</li>
-                                                <li>Akikah</li>
-                                                <li>Dan event harian lainnya</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            </a>
                         </div>
                     </div>
                 </div>

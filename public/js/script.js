@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// Order Form Packages
+// Order Form Selfphoto / Photobox Packages
 document.addEventListener("DOMContentLoaded", function () {
     const numberOfFriendsInput = document.getElementById("number_of_friends");
     const totalPaymentInput = document.querySelector(
@@ -46,4 +46,18 @@ document.addEventListener("DOMContentLoaded", function () {
             "display-total"
         ).textContent = `Rp${totalPayment.toLocaleString("id-ID")}`;
     });
+});
+
+// Order Form Other Packages
+document.getElementById("package_type").addEventListener("change", function () {
+    var packageType = this.value;
+    var eventContainer = document.getElementById("event_other_container");
+
+    if (packageType === "Event Lainnya") {
+        eventContainer.style.display = "block";
+        document.getElementById("other_event_name").required = true;
+    } else {
+        eventContainer.style.display = "none";
+        document.getElementById("other_event_name").required = false;
+    }
 });
