@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class PackagesSeeder extends Seeder
 {
@@ -18,7 +17,7 @@ class PackagesSeeder extends Seeder
             [
                 'id' => 1,
                 'name' => 'Selfphoto/Photobox',
-                'price' => 17000.00,
+                'price' => 60000.00,
                 'desc' => 'Test',
                 'created_at' => Carbon::create('2024', '11', '26', '13', '06', '25'),
                 'updated_at' => Carbon::create('2024', '11', '26', '13', '06', '25'),
@@ -26,15 +25,55 @@ class PackagesSeeder extends Seeder
             [
                 'id' => 2,
                 'name' => 'Wedding',
-                'price' => 50000.00,
+                'price' => 1800000.00,
                 'desc' => 'Test',
                 'created_at' => Carbon::create('2024', '11', '26', '13', '06', '58'),
                 'updated_at' => Carbon::create('2024', '11', '26', '13', '06', '58'),
             ],
             [
                 'id' => 3,
-                'name' => 'Marriage Proposal / Aqiqah',
-                'price' => 50000.00,
+                'name' => 'Wisuda',
+                'price' => 100000.00,
+                'desc' => 'Test',
+                'created_at' => Carbon::create('2024', '11', '26', '13', '07', '24'),
+                'updated_at' => Carbon::create('2024', '11', '26', '13', '07', '24'),
+            ],
+            [
+                'id' => 4,
+                'name' => 'Ulang Tahun',
+                'price' => 100000.00,
+                'desc' => 'Test',
+                'created_at' => Carbon::create('2024', '11', '26', '13', '07', '24'),
+                'updated_at' => Carbon::create('2024', '11', '26', '13', '07', '24'),
+            ],
+            [
+                'id' => 5,
+                'name' => 'Prewedding',
+                'price' => 100000.00,
+                'desc' => 'Test',
+                'created_at' => Carbon::create('2024', '11', '26', '13', '07', '24'),
+                'updated_at' => Carbon::create('2024', '11', '26', '13', '07', '24'),
+            ],
+            [
+                'id' => 6,
+                'name' => 'Tunangan',
+                'price' => 100000.00,
+                'desc' => 'Test',
+                'created_at' => Carbon::create('2024', '11', '26', '13', '07', '24'),
+                'updated_at' => Carbon::create('2024', '11', '26', '13', '07', '24'),
+            ],
+            [
+                'id' => 7,
+                'name' => 'Akikah',
+                'price' => 100000.00,
+                'desc' => 'Test',
+                'created_at' => Carbon::create('2024', '11', '26', '13', '07', '24'),
+                'updated_at' => Carbon::create('2024', '11', '26', '13', '07', '24'),
+            ],
+            [
+                'id' => 8,
+                'name' => 'Event Lainnya',
+                'price' => 100000.00,
                 'desc' => 'Test',
                 'created_at' => Carbon::create('2024', '11', '26', '13', '07', '24'),
                 'updated_at' => Carbon::create('2024', '11', '26', '13', '07', '24'),

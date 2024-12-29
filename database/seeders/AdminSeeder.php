@@ -21,6 +21,7 @@ class AdminSeeder extends Seeder
             'email' => 'bimonugraha@gmail.com',
             'email_verified_at' => null,
             'phone_number' => null,
+            'address' => null,
             'password' => Hash::make('bimbimoo'),
             'remember_token' => null,
             'avatar' => null,
