@@ -22,12 +22,9 @@
                 <label for="package_type" class="form-label">Paket</label>
                 <select class="form-select" id="package_type" name="package_type" required>
                     <option value="" disabled selected>Pilih Paket</option>
-                    <option value="Wisuda">Wisuda</option>
-                    <option value="Ulang Tahun">Ulang Tahun</option>
-                    <option value="Prewedding">Prewedding</option>
-                    <option value="Tunangan">Tunangan</option>
-                    <option value="Akikah">Akikah</option>
-                    <option value="Event Lainnya">Event Lainnya</option>
+                    @foreach ($packages as $package)
+                        <option value="{{ $package->name }}">{{ $package->name }}</option>
+                    @endforeach
                 </select>
             </div>
 

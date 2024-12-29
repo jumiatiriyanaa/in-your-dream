@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Package;
 use App\Models\OtherPackage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -12,7 +13,8 @@ class OtherPackageController extends Controller
     public function create()
     {
         $user = Auth::user();
-        return view('other-package.create', compact('user'));
+        $packages = Package::whereNotIn('name', ['Selfphoto/Photobox', 'Wedding'])->get();
+        return view('other-package.create', compact('user', 'packages'));
     }
 
     public function store(Request $request)
