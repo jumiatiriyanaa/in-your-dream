@@ -28,6 +28,7 @@ class OtherPackageController extends Controller
         $validated = $request->validate([
             'package_type' => 'required|string|max:50',
             'reservation_date' => 'required|date',
+            'location' => 'nullable|string',
             'additional_info' => 'nullable|string',
             'payment_method' => 'required|string',
         ]);
@@ -45,7 +46,35 @@ class OtherPackageController extends Controller
 
         $reservation = OtherPackage::create($validated);
 
+        if ($request->payment_method === 'Transfer') {
+            return redirect()->route('other-package.transfer', ['id' => $reservation->id]);
+        }
+
         return redirect()->route('other-package.resi', ['id' => $reservation->id]);
+    }
+
+    public function transfer($id)
+    {
+        $reservation = OtherPackage::findOrFail($id);
+        return view('other-package.transfer', compact('reservation'));
+    }
+
+    public function uploadProof(Request $request)
+    {
+        $validated = $request->validate([
+            'payment_proof' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'reservation_id' => 'required|exists:other_packages,id',
+        ]);
+
+        $reservation = OtherPackage::findOrFail($validated['reservation_id']);
+
+        if ($request->file('payment_proof')) {
+            $path = $request->file('payment_proof')->store('payment_proofs', 'public');
+            $reservation->update(['payment_proof' => $path, 'status' => 'Payment']);
+        }
+
+        return redirect()->route('other-package.resi', ['id' => $reservation->id])
+            ->with('success', 'Bukti pembayaran berhasil diunggah!');
     }
 
     public function showResi($id)

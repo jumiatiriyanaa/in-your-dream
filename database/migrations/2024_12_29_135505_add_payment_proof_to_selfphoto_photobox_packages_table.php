@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('backgrounds', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('selfphoto_photobox_packages', function (Blueprint $table) {
+            $table->string('payment_proof')->nullable()->after('total_price')->comment('Path to payment proof image');
         });
     }
 
@@ -22,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('backgrounds');
+        Schema::table('selfphoto_photobox_packages', function (Blueprint $table) {
+            $table->dropColumn('payment_proof');
+        });
     }
 };

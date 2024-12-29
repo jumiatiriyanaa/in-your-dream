@@ -76,16 +76,22 @@ Route::middleware('auth')->group(function () {
 
     Route::get('selfphoto-photobox-package', [SelfPhotoPhotoboxPackageController::class, 'create'])->name('selfphoto-photobox-package.create');
     Route::post('selfphoto-photobox-package/store', [SelfPhotoPhotoboxPackageController::class, 'store'])->name('selfphoto-photobox-package.store');
+    Route::get('selfphoto-photobox-package/transfer/{id}', [SelfPhotoPhotoboxPackageController::class, 'transfer'])->name('selfphoto-photobox-package.transfer');
+    Route::post('selfphoto-photobox-package/upload-proof', [SelfPhotoPhotoboxPackageController::class, 'uploadProof'])->name('selfphoto-photobox-package.upload-proof');
     Route::get('selfphoto-photobox-package/resi/{id}', [SelfPhotoPhotoboxPackageController::class, 'showResi'])->name('selfphoto-photobox-package.resi');
     Route::post('selfphoto-photobox-package/confirm/{id}', [SelfPhotoPhotoboxPackageController::class, 'confirm'])->name('selfphoto-photobox-package.confirm');
 
     Route::get('wedding-package', [WeddingPackageController::class, 'create'])->name('wedding-package.create');
     Route::post('wedding-package/store', [WeddingPackageController::class, 'store'])->name('wedding-package.store');
+    Route::get('wedding-package/transfer/{id}', [WeddingPackageController::class, 'transfer'])->name('wedding-package.transfer');
+    Route::post('wedding-package/upload-proof', [WeddingPackageController::class, 'uploadProof'])->name('wedding-package.upload-proof');
     Route::get('wedding-package/resi/{id}', [WeddingPackageController::class, 'showResi'])->name('wedding-package.resi');
     Route::post('wedding-package/confirm/{id}', [WeddingPackageController::class, 'confirm'])->name('wedding-package.confirm');
 
     Route::get('other-package', [OtherPackageController::class, 'create'])->name('other-package.create');
     Route::post('other-package/store', [OtherPackageController::class, 'store'])->name('other-package.store');
+    Route::get('other-package/transfer/{id}', [OtherPackageController::class, 'transfer'])->name('other-package.transfer');
+    Route::post('other-package/upload-proof', [OtherPackageController::class, 'uploadProof'])->name('other-package.upload-proof');
     Route::get('other-package/resi/{id}', [OtherPackageController::class, 'showResi'])->name('other-package.resi');
     Route::post('other-package/confirm/{id}', [OtherPackageController::class, 'confirm'])->name('other-package.confirm');
 });

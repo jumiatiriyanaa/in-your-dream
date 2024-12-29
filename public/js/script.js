@@ -61,3 +61,34 @@ document.getElementById("package_type").addEventListener("change", function () {
         document.getElementById("other_event_name").required = false;
     }
 });
+
+// Weeddin Form
+document.addEventListener("DOMContentLoaded", function () {
+    const sameAsAddressCheckbox = document.getElementById("same_as_address");
+    const eventLocation = document.getElementById("event_location");
+
+    if (sameAsAddressCheckbox) {
+        sameAsAddressCheckbox.addEventListener("change", function () {
+            const userAddress = this.getAttribute("data-address");
+            if (this.checked) {
+                eventLocation.value = userAddress;
+                eventLocation.disabled = true;
+            } else {
+                eventLocation.value = "";
+                eventLocation.disabled = false;
+            }
+        });
+    }
+});
+
+function copyAccountNumber() {
+    const accountNumber = document.getElementById("account-number").innerText;
+    navigator.clipboard
+        .writeText(accountNumber)
+        .then(() => {
+            alert("Nomor rekening berhasil disalin!");
+        })
+        .catch((err) => {
+            console.error("Gagal menyalin nomor rekening: ", err);
+        });
+}

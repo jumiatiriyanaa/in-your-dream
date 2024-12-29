@@ -48,6 +48,13 @@
             <div class="col-md-12">
                 <label for="event_location" class="form-label">Lokasi Acara</label>
                 <input type="text" id="event_location" name="event_location" class="form-control" required>
+                {{-- <div class="form-check mt-2">
+                    <input class="form-check-input" type="checkbox" id="same_as_address" value="1"
+                        data-address="{{ $user->address }}">
+                    <label class="form-check-label" for="same_as_address">
+                        Alamat sama dengan yang terdaftar
+                    </label>
+                </div> --}}
             </div>
 
             <div class="col-md-12">

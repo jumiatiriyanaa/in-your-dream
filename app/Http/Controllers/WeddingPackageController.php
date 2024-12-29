@@ -51,7 +51,35 @@ class WeddingPackageController extends Controller
 
         $reservation = WeddingPackage::create($validated);
 
+        if ($request->payment_method === 'Transfer') {
+            return redirect()->route('wedding-package.transfer', ['id' => $reservation->id]);
+        }
+
         return redirect()->route('wedding-package.resi', ['id' => $reservation->id]);
+    }
+
+    public function transfer($id)
+    {
+        $reservation = WeddingPackage::findOrFail($id);
+        return view('wedding-package.transfer', compact('reservation'));
+    }
+
+    public function uploadProof(Request $request)
+    {
+        $validated = $request->validate([
+            'payment_proof' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'reservation_id' => 'required|exists:wedding_packages,id',
+        ]);
+
+        $reservation = WeddingPackage::findOrFail($validated['reservation_id']);
+
+        if ($request->file('payment_proof')) {
+            $path = $request->file('payment_proof')->store('payment_proofs', 'public');
+            $reservation->update(['payment_proof' => $path, 'status' => 'Payment']);
+        }
+
+        return redirect()->route('wedding-package.resi', ['id' => $reservation->id])
+            ->with('success', 'Bukti pembayaran berhasil diunggah!');
     }
 
     public function showResi($id)

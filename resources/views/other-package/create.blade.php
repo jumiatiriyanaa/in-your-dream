@@ -57,6 +57,11 @@
             </div>
 
             <div class="col-md-12">
+                <label for="location" class="form-label">Lokasi Acara</label>
+                <input type="text" id="location" name="location" class="form-control" required>
+            </div>
+
+            <div class="col-md-12">
                 <label for="additional_info" class="form-label">Keterangan Tambahan</label>
                 <textarea class="form-control" id="additional_info" name="additional_info" rows="3"></textarea>
             </div>

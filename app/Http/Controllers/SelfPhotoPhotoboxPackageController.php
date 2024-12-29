@@ -53,7 +53,35 @@ class SelfPhotoPhotoboxPackageController extends Controller
 
         $reservation = SelfPhotoPhotoboxPackage::create($validated);
 
+        if ($request->payment_method === 'Transfer') {
+            return redirect()->route('selfphoto-photobox-package.transfer', ['id' => $reservation->id]);
+        }
+
         return redirect()->route('selfphoto-photobox-package.resi', ['id' => $reservation->id]);
+    }
+
+    public function transfer($id)
+    {
+        $reservation = SelfPhotoPhotoboxPackage::findOrFail($id);
+        return view('selfphoto-photobox-package.transfer', compact('reservation'));
+    }
+
+    public function uploadProof(Request $request)
+    {
+        $validated = $request->validate([
+            'payment_proof' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'reservation_id' => 'required|exists:selfphoto_photobox_packages,id',
+        ]);
+
+        $reservation = SelfPhotoPhotoboxPackage::findOrFail($validated['reservation_id']);
+
+        if ($request->file('payment_proof')) {
+            $path = $request->file('payment_proof')->store('payment_proofs', 'public');
+            $reservation->update(['payment_proof' => $path, 'status' => 'Payment']);
+        }
+
+        return redirect()->route('selfphoto-photobox-package.resi', ['id' => $reservation->id])
+            ->with('success', 'Bukti pembayaran berhasil diunggah!');
     }
 
     public function showResi($id)

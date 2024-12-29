@@ -23,6 +23,7 @@ class WeddingPackage extends Model
         'additional_price',
         'admin_fee',
         'total_price',
+        'payment_proof',
         'status',
     ];
 

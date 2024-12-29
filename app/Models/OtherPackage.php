@@ -15,6 +15,7 @@ class OtherPackage extends Model
         'user_id',
         'package_type',
         'reservation_date',
+        'location',
         'additional_info',
         'payment_method',
         'base_price',

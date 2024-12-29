@@ -22,6 +22,7 @@ class SelfPhotoPhotoboxPackage extends Model
         'additional_person_cost',
         'admin_fee',
         'total_price',
+        'payment_proof',
         'status'
     ];
 

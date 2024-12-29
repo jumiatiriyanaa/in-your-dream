@@ -4,7 +4,14 @@
 
 @section('content')
     <div class="container mt-5 mb-5">
-        <h1 class="section-title text-center mb-4">Rincian Reservasi</h1>
+        <h1 class="section-title text-center mb-2">Rincian Reservasi</h1>
+
+        @if (session('success'))
+            <div class="alert alert-success mb-4">
+                {{ session('success') }}
+            </div>
+        @endif
+
         <div class="d-flex align-items-center mb-4">
             <img src="https://via.placeholder.com/50" alt="Avatar" class="avatar me-3">
             <div>
