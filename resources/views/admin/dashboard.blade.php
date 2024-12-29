@@ -32,7 +32,7 @@
                                         <i class="bi bi-credit-card-2-back"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6></h6>
+                                        <h6>{{ $totalReservation }}</h6>
                                     </div>
                                 </div>
                             </div>
