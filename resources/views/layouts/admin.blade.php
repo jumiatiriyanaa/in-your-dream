@@ -144,21 +144,13 @@
                 </a>
             </li>
 
-            <!-- Manage Reservasi -->
+            <!-- Reservasi -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="">
                     <i class="bi bi-credit-card-2-back"></i>
                     <span>Reservasi</span>
                 </a>
             </li>
-
-            <!-- Studio -->
-            {{-- <li class="nav-item">
-                <a class="nav-link collapsed" href="">
-                    <i class="bi bi-camera"></i>
-                    <span>Studio</span>
-                </a>
-            </li> --}}
 
             <!-- Gallery -->
             <li class="nav-item">
@@ -169,23 +161,31 @@
                 </a>
             </li>
 
-            <!-- Package -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="">
-                    <i class="bi bi-plus-square"></i>
-                    <span>Package</span>
-                </a>
-            </li>
-
-            <!-- Heading -->
-            <li class="nav-heading">Master Data</li>
-
             <!-- Photographer -->
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('admin.photographers.index') ? '' : 'collapsed' }}"
                     href="{{ route('admin.photographers.index') }}">
                     <i class="bi bi-person-gear"></i>
                     <span>Photographer</span>
+                </a>
+            </li>
+
+            <!-- Heading -->
+            <li class="nav-heading">Master Data</li>
+
+            <!-- Studio -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="">
+                    <i class="bi bi-images"></i>
+                    <span>Background</span>
+                </a>
+            </li>
+
+            <!-- Package -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="">
+                    <i class="bi bi-plus-square"></i>
+                    <span>Package</span>
                 </a>
             </li>
 
@@ -213,7 +213,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="">
                     <i class="bi bi-camera"></i>
-                    <span>Weeding</span>
+                    <span>Weeding Package</span>
                 </a>
             </li>
 
@@ -221,7 +221,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="">
                     <i class="bi bi-camera"></i>
-                    <span>Marriage Proposal / Aqiqah</span>
+                    <span>Other Package</span>
                 </a>
             </li>
         </ul>
