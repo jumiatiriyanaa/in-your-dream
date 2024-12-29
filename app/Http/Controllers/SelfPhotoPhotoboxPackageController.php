@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Background;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,8 @@ class SelfPhotoPhotoboxPackageController extends Controller
     public function create()
     {
         $user = Auth::user();
-        return view('selfphoto-photobox-package.create', compact('user'));
+        $backgrounds = Background::all();
+        return view('selfphoto-photobox-package.create', compact('user', 'backgrounds'));
     }
 
     public function store(Request $request)
