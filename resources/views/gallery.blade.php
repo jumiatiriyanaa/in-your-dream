@@ -45,10 +45,6 @@
                             <div class="gallery-card">
                                 <img src="{{ asset('storage/' . $gallery->image_path) }}" class="img-fluid gallery-image"
                                     alt="Gallery Image">
-                                {{-- <div class="gallery-info">
-                                    <h5 class="gallery-title">{{ $gallery->package->name }}</h5>
-                                    <p class="gallery-date">{{ $gallery->created_at->format('d M Y') }}</p>
-                                </div> --}}
                             </div>
                         </div>
                     @endforeach
