@@ -1,43 +1,48 @@
 @extends('layouts.user')
 
-@section('title', 'Reservasi Photobox - Self Photo')
+@section('title', 'Reservasi Photobox - Self Photo Package')
 
 @section('content')
     <div class="container mt-3 mb-5">
-        <h1 class="text-center mb-4">Photobox - Self Photo</h1>
+        <h1 class="text-center mb-4">Photobox - Self Photo Package</h1>
 
         @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
 
-        <form action="{{ route('selfphoto.store') }}" method="POST" class="row g-4">
+        @if (Auth::check() && empty(Auth::user()->phone_number))
+            <div class="alert alert-warning">
+                <strong>Perhatian!</strong> Silahkan lengkapi data profile Anda, terutama nomor telepon.
+            </div>
+        @endif
+
+        <form action="{{ route('selfphoto-photobox-package.store') }}" method="POST" class="row g-4">
             @csrf
-            <div class="col-md-12">
-                <label for="user_name" class="form-label">Nama</label>
-                <input type="text" class="form-control" id="user_name" name="user_name"
-                    value="{{ Auth::check() ? Auth::user()->name : '' }}" required disabled>
+            <div class="col-md-6">
+                <label for="name" class="form-label">Nama</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}"
+                    disabled>
             </div>
 
-            <div class="col-md-12">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email"
-                    value="{{ Auth::check() ? Auth::user()->email : '' }}" required disabled>
-            </div>
-
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <label for="phone_number" class="form-label">Nomor Telepon</label>
                 <input type="text" class="form-control" id="phone_number" name="phone_number"
-                    value="{{ Auth::check() ? Auth::user()->phone_number : '' }}" required disabled>
+                    value="{{ $user->phone_number }}" disabled>
+            </div>
+
+            <div class="col-md-12">
+                <label for="address" class="form-label">Alamat</label>
+                <textarea class="form-control" id="address" name="address" rows="3" disabled>{{ $user->address }}</textarea>
             </div>
 
             <div class="mt-4 row mb-3">
                 <div class="col-md-6">
-                    <label for="schedule_date" class="form-label">Tanggal</label>
+                    <label for="schedule_date" class="form-label">Tanggal Reservasi</label>
                     <input type="date" class="form-control" id="schedule_date" name="schedule_date" required>
                 </div>
 
                 <div class="col-md-6">
-                    <label for="schedule_time" class="form-label">Waktu</label>
+                    <label for="schedule_time" class="form-label">Waktu Reservasi</label>
                     <input type="time" class="form-control" id="schedule_time" name="schedule_time" required>
                 </div>
             </div>

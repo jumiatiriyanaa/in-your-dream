@@ -30,7 +30,8 @@
                 <div class="container">
                     <div class="row g-0">
                         <div class="col-lg-4 col-md-6">
-                            <a href="{{ url('/selfphoto') }}" style="text-decoration: none; color: inherit;">
+                            <a href="{{ url('/selfphoto-photobox-package') }}"
+                                style="text-decoration: none; color: inherit;">
                                 <div class="service-item-card">
                                     <span class="number"><span class="text-white">01</span></span>
                                     <h3 class="text-center mb-4">Photobox / Self Photo</h3>
@@ -47,7 +48,7 @@
                             </a>
                         </div>
                         <div class="col-lg-4 col-md-6">
-                            <a href="{{ url('/weddings') }}" style="text-decoration: none; color: inherit;">
+                            <a href="{{ url('/wedding-package') }}" style="text-decoration: none; color: inherit;">
                                 <div class="service-item-card">
                                     <h3 class="text-center mb-4">Wedding Package</h3>
                                     <span class="number"><span class="text-white">02</span></span>

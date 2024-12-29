@@ -4,11 +4,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GalleryController;
-use App\Http\Controllers\WeddingController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WeddingPackageController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\OtherPackageController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\SelfPhotoPhotoboxController;
+use App\Http\Controllers\SelfPhotoPhotoboxPackageController;
 use App\Http\Controllers\Admin\AboutUsManagementController;
 use App\Http\Controllers\Admin\GalleryManagementController;
 use App\Http\Controllers\Admin\PhotographerManagementController;
@@ -69,15 +70,19 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('selfphoto', [SelfPhotoPhotoboxController::class, 'create'])->name('selfphoto.create');
-    Route::post('selfphoto/store', [SelfPhotoPhotoboxController::class, 'store'])->name('selfphoto.store');
-    Route::get('selfphoto/resi/{id}', [SelfPhotoPhotoboxController::class, 'showResi'])->name('selfphoto.resi');
-    Route::post('selfphoto/confirm/{id}', [SelfPhotoPhotoboxController::class, 'confirm'])->name('selfphoto.confirm');
+    Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::get('profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
 
-    Route::get('weddings', [WeddingController::class, 'create'])->name('weddings.create');
-    Route::post('weddings/store', [WeddingController::class, 'store'])->name('weddings.store');
-    Route::get('weddings/resi/{id}', [WeddingController::class, 'showResi'])->name('weddings.resi');
-    Route::post('weddings/confirm/{id}', [WeddingController::class, 'confirm'])->name('weddings.confirm');
+    Route::get('selfphoto-photobox-package', [SelfPhotoPhotoboxPackageController::class, 'create'])->name('selfphoto-photobox-package.create');
+    Route::post('selfphoto-photobox-package/store', [SelfPhotoPhotoboxPackageController::class, 'store'])->name('selfphoto-photobox-package.store');
+    Route::get('selfphoto-photobox-package/resi/{id}', [SelfPhotoPhotoboxPackageController::class, 'showResi'])->name('selfphoto-photobox-package.resi');
+    Route::post('selfphoto-photobox-package/confirm/{id}', [SelfPhotoPhotoboxPackageController::class, 'confirm'])->name('selfphoto-photobox-package.confirm');
+
+    Route::get('wedding-package', [WeddingPackageController::class, 'create'])->name('wedding-package.create');
+    Route::post('wedding-package/store', [WeddingPackageController::class, 'store'])->name('wedding-package.store');
+    Route::get('wedding-package/resi/{id}', [WeddingPackageController::class, 'showResi'])->name('wedding-package.resi');
+    Route::post('wedding-package/confirm/{id}', [WeddingPackageController::class, 'confirm'])->name('wedding-package.confirm');
 
     Route::get('other-package', [OtherPackageController::class, 'create'])->name('other-package.create');
     Route::post('other-package/store', [OtherPackageController::class, 'store'])->name('other-package.store');

@@ -5,22 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Wedding extends Model
+class WeddingPackage extends Model
 {
     use HasFactory;
 
-    protected $table = 'weddings';
+    protected $table = 'wedding_packages';
 
     protected $fillable = [
-        'name',
-        'email',
-        'phone_number',
-        'address',
+        'user_id',
         'start_date',
         'end_date',
         'event_location',
         'event_type',
-        'package_details',
+        'details',
         'payment_method',
         'base_price',
         'additional_price',
@@ -28,4 +25,9 @@ class Wedding extends Model
         'total_price',
         'status',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

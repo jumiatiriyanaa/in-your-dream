@@ -8,16 +8,16 @@
         <div class="d-flex align-items-center mb-4">
             <img src="https://via.placeholder.com/50" alt="Avatar" class="avatar me-3">
             <div>
-                <h5 class="mb-0">{{ $reservation->name }}</h5>
-                <p class="mb-0">{{ Auth::user()->email }}</p>
-                <p class="mb-0">{{ $reservation->phone_number }}</p>
+                <h5 class="mb-0">{{ $reservation->user->name }}</h5>
+                <p class="mb-0">{{ $reservation->user->email }}</p>
+                <p class="mb-0">{{ $reservation->user->phone_number }}</p>
             </div>
         </div>
 
         <div class="card mb-4">
             <div class="card-body">
                 <h5 class="card-title">{{ $reservation->package_type }}</h5>
-                <span><strong>Alamat:</strong> {{ $reservation->address }}</span> <br>
+                <span><strong>Alamat:</strong> {{ $reservation->user->address }}</span> <br>
                 <span><strong>Tanggal Reservasi:</strong>
                     {{ \Carbon\Carbon::parse($reservation->reservation_date)->translatedFormat('l, j F Y') }}</span> <br>
                 <span><strong>Keterangan Tambahan:</strong> {{ $reservation->additional_info ?? '-' }}</span> <br>

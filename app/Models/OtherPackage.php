@@ -12,10 +12,8 @@ class OtherPackage extends Model
     protected $table = 'other_packages';
 
     protected $fillable = [
+        'user_id',
         'package_type',
-        'name',
-        'phone_number',
-        'address',
         'reservation_date',
         'additional_info',
         'payment_method',
@@ -23,4 +21,9 @@ class OtherPackage extends Model
         'admin_fee',
         'total_price',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

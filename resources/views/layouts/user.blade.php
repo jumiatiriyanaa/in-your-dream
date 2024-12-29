@@ -47,20 +47,23 @@
                                 {{ Auth::user()->name }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                <li>
-                                    <form action="{{ route('logout') }}" method="POST" class="dropdown-item p-0 m-0">
-                                        @csrf
-                                        <button type="submit"
-                                            class="btn btn-link text-decoration-none text-dark w-100 text-start">Keluar</button>
-                                    </form>
-                                </li>
+                                <li><a class="dropdown-item" href="{{ route('profile.index') }}">Profile</a></li>
+                                <li><a class="dropdown-item text-danger" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        Keluar</a></li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    style="display: none;">
+                                    @csrf
+                                </form>
                             </ul>
                         </li>
-                    @else
-                        <li class="nav-item">
-                            <a class="nav-link fw-bold" href="{{ route('login') }}">Sign In</a>
-                        </li>
-                    @endauth
+                    </ul>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold" href="{{ route('login') }}">Sign In</a>
+                    </li>
+                @endauth
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>

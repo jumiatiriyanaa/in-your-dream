@@ -10,6 +10,12 @@
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
 
+        @if (Auth::check() && empty(Auth::user()->phone_number))
+            <div class="alert alert-warning">
+                <strong>Perhatian!</strong> Silahkan lengkapi data profile Anda, terutama nomor telepon.
+            </div>
+        @endif
+
         <form action="{{ route('other-package.store') }}" method="POST" class="row g-4">
             @csrf
             <div class="col-md-12">
@@ -45,7 +51,7 @@
 
             <div class="col-md-12">
                 <label for="address" class="form-label">Alamat</label>
-                <textarea class="form-control" id="address" name="address" rows="3" required></textarea>
+                <textarea class="form-control" id="address" name="address" rows="3" disabled>{{ $user->address }}</textarea>
             </div>
 
             <div class="col-md-12">

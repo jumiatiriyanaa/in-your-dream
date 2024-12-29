@@ -1,38 +1,38 @@
 @extends('layouts.user')
 
-@section('title', 'Reservasi Wedding')
+@section('title', 'Reservasi Wedding Package')
 
 @section('content')
     <div class="container mt-3 mb-5">
-        <h1 class="text-center mb-4">Wedding</h1>
+        <h1 class="text-center mb-4">Wedding Package</h1>
 
         @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
 
-        <form action="{{ route('weddings.store') }}" method="POST" class="row g-4">
+        @if (Auth::check() && empty(Auth::user()->phone_number))
+            <div class="alert alert-warning">
+                <strong>Perhatian!</strong> Silahkan lengkapi data profile Anda, terutama nomor telepon.
+            </div>
+        @endif
+
+        <form action="{{ route('wedding-package.store') }}" method="POST" class="row g-4">
             @csrf
             <div class="col-md-6">
                 <label for="name" class="form-label">Nama</label>
-                <input type="text" class="form-control" id="name" name="name"
-                    value="{{ Auth::check() ? Auth::user()->name : '' }}" required>
-            </div>
-
-            <div class="col-md-6">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email"
-                    value="{{ Auth::check() ? Auth::user()->email : '' }}" required>
+                <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}"
+                    disabled>
             </div>
 
             <div class="col-md-6">
                 <label for="phone_number" class="form-label">Nomor Telepon</label>
                 <input type="text" class="form-control" id="phone_number" name="phone_number"
-                    value="{{ Auth::check() ? Auth::user()->phone_number : '' }}" required>
+                    value="{{ $user->phone_number }}" disabled>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <label for="address" class="form-label">Alamat</label>
-                <input type="text" id="address" name="address" class="form-control" required>
+                <textarea class="form-control" id="address" name="address" rows="3" disabled>{{ $user->address }}</textarea>
             </div>
 
             <div class="col-md-6">
@@ -65,15 +65,14 @@
             <div class="col-md-12">
                 <label class="form-label">Lain-lain</label>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="package_details" id="option1"
+                    <input class="form-check-input" type="radio" name="details" id="option1"
                         value="Album & Cetak 4R (80 lbr) Start [250k]">
                     <label class="form-check-label" for="option1">
                         Album & Cetak 4R (80 lbr) Start [250k]
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="package_details" id="option2" value="null"
-                        checked>
+                    <input class="form-check-input" type="radio" name="details" id="option2" value="null" checked>
                     <label class="form-check-label" for="option2">
                         Tidak ada tambahan
                     </label>

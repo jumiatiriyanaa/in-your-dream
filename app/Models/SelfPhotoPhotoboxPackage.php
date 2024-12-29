@@ -5,26 +5,28 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SelfPhotoPhotobox extends Model
+class SelfPhotoPhotoboxPackage extends Model
 {
     use HasFactory;
 
-    protected $table = 'selfphoto_photobox';
+    protected $table = 'selfphoto_photobox_packages';
 
     protected $fillable = [
-        'user_name',
-        'email',
-        'phone_number',
+        'user_id',
         'schedule_date',
         'schedule_time',
         'background_choice',
         'number_of_friends',
         'payment_method',
-        'virtual_account_number',
-        'subtotal_package',
+        'base_price',
         'additional_person_cost',
         'admin_fee',
-        'total_payment',
-        'status',
+        'total_price',
+        'status'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

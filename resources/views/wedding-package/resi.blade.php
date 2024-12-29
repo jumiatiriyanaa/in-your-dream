@@ -1,6 +1,6 @@
 @extends('layouts.user')
 
-@section('title', 'Rincian Reservasi Weeding')
+@section('title', 'Rincian Reservasi Wedding')
 
 @section('content')
     <div class="container mt-5 mb-5">
@@ -8,15 +8,16 @@
         <div class="d-flex align-items-center mb-4">
             <img src="https://via.placeholder.com/50" alt="Avatar" class="avatar me-3">
             <div>
-                <h5 class="mb-0">{{ $reservation->name }}</h5>
-                <p class="mb-0">{{ $reservation->email }}</p>
-                <p class="mb-0">{{ $reservation->phone_number }}</p>
+                <h5 class="mb-0">{{ $reservation->user->name }}</h5>
+                <p class="mb-0">{{ $reservation->user->email }}</p>
+                <p class="mb-0">{{ $reservation->user->phone_number }}</p>
             </div>
         </div>
 
         <div class="card mb-4">
             <div class="card-body">
                 <h5 class="card-title">Detail Reservasi</h5>
+                <span><strong>Alamat:</strong> {{ $reservation->user->address }}</span> <br>
                 <span><strong>Lokasi Acara:</strong> {{ $reservation->event_location }}</span> <br>
                 <span><strong>Tanggal Mulai:</strong>
                     {{ \Carbon\Carbon::parse($reservation->start_date)->translatedFormat('l, j F Y') }}</span> <br>
@@ -37,7 +38,7 @@
             </div>
         </div>
 
-        <form action="{{ route('weddings.confirm', $reservation->id) }}" method="POST">
+        <form action="{{ route('wedding-package.confirm', $reservation->id) }}" method="POST">
             @csrf
             <button type="submit" class="btn-booking">Booking</button>
         </form>

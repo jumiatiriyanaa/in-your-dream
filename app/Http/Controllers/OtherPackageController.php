@@ -16,28 +16,28 @@ class OtherPackageController extends Controller
 
     public function store(Request $request)
     {
+        $user = Auth::user();
+
+        if (empty($user->phone_number)) {
+            return redirect()->route('profile.edit')->with('error', 'Silahkan lengkapi nomor telepon Anda terlebih dahulu.');
+        }
+
         $validated = $request->validate([
             'package_type' => 'required|string|max:50',
-            'address' => 'required|string',
             'reservation_date' => 'required|date',
             'additional_info' => 'nullable|string',
             'payment_method' => 'required|string',
         ]);
 
-        $user = Auth::user();
-
         $base_price = 100000;
         $admin_fee = 3000;
-
         $total_price = $base_price + $admin_fee;
 
-        $validated['name'] = $user->name;
-        $validated['phone_number'] = $user->phone_number;
+        $validated['user_id'] = $user->id;
         $validated['base_price'] = $base_price;
         $validated['admin_fee'] = $admin_fee;
         $validated['total_price'] = $total_price;
         $validated['status'] = 'Pending';
-
         $validated['payment_method'] = $request->payment_method;
 
         $reservation = OtherPackage::create($validated);
