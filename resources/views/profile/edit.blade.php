@@ -37,13 +37,16 @@
                     <div class="row">
                         <!-- Avatar Column -->
                         <div class="col-md-4 text-center">
-                            @if ($user->login_type == 'google' && $user->avatar)
-                                <img src="{{ $user->avatar }}" alt="Avatar" class="img-fluid rounded-circle"
-                                    width="150">
-                            @else
-                                <img src="{{ asset('storage/' . $user->avatar) }}" alt="Avatar"
-                                    class="img-fluid rounded-circle" width="150">
-                            @endif
+                            @php
+                                $avatar =
+                                    $user->login_type == 'google' && $user->avatar
+                                        ? $user->avatar
+                                        : ($user->avatar
+                                            ? asset('storage/' . $user->avatar)
+                                            : 'https://via.placeholder.com/300');
+                            @endphp
+                            <img src="{{ $avatar }}" alt="Avatar" class="img-fluid rounded-circle"
+                                style="width: 278px; height: 278px; object-fit: cover;">
                             <h4>{{ $user->name }}</h4>
                             <!-- Avatar Upload -->
                             @if ($user->login_type != 'google')

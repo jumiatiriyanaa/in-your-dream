@@ -30,12 +30,16 @@
                 <div class="row">
                     <!-- Avatar Column (Left) -->
                     <div class="col-md-4 text-center">
-                        @if ($user->login_type == 'google' && $user->avatar)
-                            <img src="{{ $user->avatar }}" alt="Avatar" class="img-fluid rounded-circle" width="150">
-                        @else
-                            <img src="{{ asset('storage/' . $user->avatar) }}" alt="Avatar"
-                                class="img-fluid rounded-circle" width="150">
-                        @endif
+                        @php
+                            $avatar =
+                                $user->login_type == 'google' && $user->avatar
+                                    ? $user->avatar
+                                    : ($user->avatar
+                                        ? asset('storage/' . $user->avatar)
+                                        : 'https://via.placeholder.com/300');
+                        @endphp
+                        <img src="{{ $avatar }}" alt="Avatar" class="img-fluid rounded-circle"
+                            style="width: 250px; height: 250px; object-fit: cover;">
                         <h4 class="mb-3">{{ $user->name }}</h4>
                         <a href="{{ route('profile.edit') }}" class="btn btn-dark">Update Profile</a>
                     </div>
