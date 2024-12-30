@@ -22,6 +22,8 @@ class OtherPackage extends Model
         'base_price',
         'admin_fee',
         'total_price',
+        'payment_proof',
+        'status'
     ];
 
     public function user()
