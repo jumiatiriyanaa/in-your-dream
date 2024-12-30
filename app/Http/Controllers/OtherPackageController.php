@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Package;
+use App\Models\Reservation;
 use App\Models\OtherPackage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -86,9 +87,24 @@ class OtherPackageController extends Controller
     public function confirm($id)
     {
         $reservation = OtherPackage::findOrFail($id);
-        $reservation->status = 'Confirmed';
-        $reservation->save();
+        $reservation->update(['status' => 'Confirmed']);
 
-        return redirect()->route('other-package.create')->with('success', 'Pesanan telah dikonfirmasi!');
+        $this->storeReservation($reservation, 'Other Package');
+
+        return redirect()->route('other-package.create')
+            ->with('success', 'Pesanan telah dikonfirmasi!');
+    }
+
+    protected function storeReservation($reservation, $packageType)
+    {
+        Reservation::create([
+            'user_id' => $reservation->user_id,
+            'reservation_date' => $reservation->schedule_date ?? $reservation->reservation_date ?? $reservation->start_date,
+            'package_type' => $packageType,
+            'package_id' => $reservation->id,
+            'total_price' => $reservation->total_price,
+            'payment_proof' => $reservation->payment_proof,
+            'status' => 'Confirmed',
+        ]);
     }
 }

@@ -30,4 +30,9 @@ class OtherPackage extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function reservation()
+    {
+        return $this->morphOne(Reservation::class, 'package');
+    }
 }

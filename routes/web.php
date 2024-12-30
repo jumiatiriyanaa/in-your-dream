@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\GalleryManagementController;
 use App\Http\Controllers\Admin\PackageManagementController;
 use App\Http\Controllers\SelfPhotoPhotoboxPackageController;
 use App\Http\Controllers\Admin\BackgroundManagementController;
+use App\Http\Controllers\Admin\ReservationManagementController;
 use App\Http\Controllers\Admin\PhotographerManagementController;
 use App\Http\Controllers\Admin\SelfPhotoPhotoboxManagementController;
 
@@ -68,11 +69,12 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    Route::resource('reservations', ReservationManagementController::class);
     Route::resource('galleries', GalleryManagementController::class);
-    Route::resource('about-us', AboutUsManagementController::class);
-    Route::resource('photographers', PhotographerManagementController::class)->except(['show']);
-    Route::resource('packages', PackageManagementController::class);
+    Route::resource('photographers', PhotographerManagementController::class);
     Route::resource('backgrounds', BackgroundManagementController::class);
+    Route::resource('packages', PackageManagementController::class);
+    Route::resource('about-us', AboutUsManagementController::class);
 });
 
 Route::middleware('auth')->group(function () {

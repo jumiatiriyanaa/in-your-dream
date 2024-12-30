@@ -146,7 +146,8 @@
 
             <!-- Reservasi -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="">
+                <a class="nav-link {{ request()->routeIs('admin.reservations.index') ? '' : 'collapsed' }}"
+                    href="{{ route('admin.reservations.index') }}">
                     <i class="bi bi-credit-card-2-back"></i>
                     <span>Reservasi</span>
                 </a>
@@ -200,7 +201,7 @@
                 </a>
             </li>
 
-            <!-- Heading -->
+            {{-- <!-- Heading -->
             <li class="nav-heading">Studio</li>
 
             <!-- Selfphoto / Photobox -->
@@ -225,7 +226,7 @@
                     <i class="bi bi-camera"></i>
                     <span>Other Package</span>
                 </a>
-            </li>
+            </li> --}}
         </ul>
     </aside>
     <!-- End Sidebar-->
