@@ -3,9 +3,11 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
 use Illuminate\Database\Seeder;
 use Database\Seeders\AdminSeeder;
 use Database\Seeders\PackagesSeeder;
+use Database\Seeders\BackgroundSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,7 +18,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             AdminSeeder::class,
-            PackagesSeeder::class,
+            // PackagesSeeder::class,
+            // BackgroundSeeder::class,
         ]);
     }
 }
