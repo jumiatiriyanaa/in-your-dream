@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\AboutUs;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class AboutUsManagementController extends Controller
 {
@@ -12,35 +13,6 @@ class AboutUsManagementController extends Controller
     {
         $aboutUs = AboutUs::latest()->first();
         return view('admin.about-us.index', compact('aboutUs'));
-    }
-
-    public function edit()
-    {
-        $aboutUs = AboutUs::latest()->first();
-        return view('admin.about-us.edit', compact('aboutUs'));
-    }
-
-    public function update(Request $request, AboutUs $aboutUs)
-    {
-        $request->validate([
-            'description' => 'required|string|max:1000',
-            'image' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
-        ]);
-
-        $aboutUs->description = $request->description;
-
-        if ($request->hasFile('image')) {
-            if ($aboutUs->image_path && file_exists(public_path('about_us/' . $aboutUs->image_path))) {
-                unlink(public_path('about_us/' . $aboutUs->image_path));
-            }
-
-            $imagePath = $request->file('image')->store('about_us', 'public');
-            $aboutUs->image_path = basename($imagePath);
-        }
-
-        $aboutUs->save();
-
-        return redirect()->route('admin.about-us.index')->with('success', 'About Us content updated successfully!');
     }
 
     public function create()
@@ -55,21 +27,53 @@ class AboutUsManagementController extends Controller
             'image' => 'required|image|mimes:jpg,png,jpeg,gif|max:2048',
         ]);
 
-        $aboutUs = new AboutUs();
-        $aboutUs->description = $request->description;
-
         $imagePath = $request->file('image')->store('about_us', 'public');
-        $aboutUs->image_path = basename($imagePath);
 
-        $aboutUs->save();
+        AboutUs::create([
+            'description' => $request->description,
+            'image_path' => $imagePath,
+        ]);
 
         return redirect()->route('admin.about-us.index')->with('success', 'About Us content created successfully!');
     }
 
-    public function destroy(AboutUs $aboutUs)
+    public function edit($id)
     {
-        if ($aboutUs->image_path && file_exists(public_path('about_us/' . $aboutUs->image_path))) {
-            unlink(public_path('about_us/' . $aboutUs->image_path));
+        $aboutUs = AboutUs::findOrFail($id);
+        return view('admin.about-us.edit', compact('aboutUs'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $aboutUs = AboutUs::findOrFail($id);
+
+        $request->validate([
+            'description' => 'required|string|max:1000',
+            'image' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
+        ]);
+
+        if ($request->hasFile('image')) {
+            if (Storage::exists('public/' . $aboutUs->image_path)) {
+                Storage::delete('public/' . $aboutUs->image_path);
+            }
+
+            $aboutUs->image_path = $request->file('image')->store('about_us', 'public');
+        }
+
+        $aboutUs->update([
+            'description' => $request->description,
+            'image_path' => $aboutUs->image_path ?? $aboutUs->image_path,
+        ]);
+
+        return redirect()->route('admin.about-us.index')->with('success', 'About Us content updated successfully!');
+    }
+
+    public function destroy($id)
+    {
+        $aboutUs = AboutUs::findOrFail($id);
+
+        if (Storage::exists('public/' . $aboutUs->image_path)) {
+            Storage::delete('public/' . $aboutUs->image_path);
         }
 
         $aboutUs->delete();

@@ -47,8 +47,8 @@
                                     <thead>
                                         <tr>
                                             <th>No.</th>
-                                            <th>Paket</th>
-                                            <th>Harga</th>
+                                            <th>Nama</th>
+                                            <th>Gambar</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>

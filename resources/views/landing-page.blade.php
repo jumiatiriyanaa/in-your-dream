@@ -28,19 +28,15 @@
             <div class="content">
                 <div class="container">
                     <div class="row">
+                        <!-- About Us Image -->
                         <div class="col-lg-6 mb-4 mb-lg-0">
-                            @if (!empty($aboutUs) && $aboutUs->image_path)
-                                <img src="{{ asset($aboutUs->image_path) }}" alt="About Us Image"
-                                    class="img-fluid img-overlap" data-aos="zoom-out" />
-                            @else
-                                <img src="{{ asset('img/aboutus.png') }}" alt="Image" class="img-fluid img-overlap"
-                                    data-aos="zoom-out" />
-                            @endif
+                            <img src="{{ !empty($aboutUs->image_path) ? asset($aboutUs->image_path) : asset('img/aboutus.png') }}"
+                                alt="About Us Image" class="img-fluid img-overlap" data-aos="zoom-out" />
                         </div>
+                        <!-- About Us Description -->
                         <div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="100">
                             <h2 class="content-title mb-4">
-                                About
-                                <strong>Us</strong>
+                                About <strong>Us</strong>
                             </h2>
                             <p class="opacity-50">
                                 {{ $aboutUs->description ?? 'In Your Dream adalah studio foto profesional yang berlokasi di kota Bengkalis, tempat di mana momen-momen istimewa Anda diabadikan dengan sepenuh hati. IYD Studio menawarkan layanan fotografi untuk berbagai keperluan, mulai dari pemotretan pernikahan, potret pribadi dan keluarga, hingga acara-acara spesial lainnya.' }}

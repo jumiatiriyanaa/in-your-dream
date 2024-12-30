@@ -3,20 +3,20 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Models\SelfPhotoPhotobox;
 use App\Http\Controllers\Controller;
+use App\Models\SelfPhotoPhotoboxPackage;
 
 class SelfPhotoPhotoboxManagementController extends Controller
 {
     public function index()
     {
-        $data = SelfPhotoPhotobox::all();
+        $data = SelfPhotoPhotoboxPackage::all();
         return response()->json($data, 200);
     }
 
     public function show($id)
     {
-        $data = SelfPhotoPhotobox::find($id);
+        $data = SelfPhotoPhotoboxPackage::find($id);
 
         if (!$data) {
             return response()->json(['message' => 'Data not found'], 404);
@@ -43,14 +43,14 @@ class SelfPhotoPhotoboxManagementController extends Controller
             'total_payment' => 'required|integer',
         ]);
 
-        $data = SelfPhotoPhotobox::create($validatedData);
+        $data = SelfPhotoPhotoboxPackage::create($validatedData);
 
         return response()->json(['message' => 'Data created successfully', 'data' => $data], 201);
     }
 
     public function update(Request $request, $id)
     {
-        $data = SelfPhotoPhotobox::find($id);
+        $data = SelfPhotoPhotoboxPackage::find($id);
 
         if (!$data) {
             return response()->json(['message' => 'Data not found'], 404);
@@ -79,7 +79,7 @@ class SelfPhotoPhotoboxManagementController extends Controller
 
     public function destroy($id)
     {
-        $data = SelfPhotoPhotobox::find($id);
+        $data = SelfPhotoPhotoboxPackage::find($id);
 
         if (!$data) {
             return response()->json(['message' => 'Data not found'], 404);

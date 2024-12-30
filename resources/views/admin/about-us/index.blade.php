@@ -52,60 +52,57 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($aboutUs as $gallery)
+                                        @if ($aboutUs)
                                             <tr>
-                                                <td>{{ $loop->iteration }}.</td>
+                                                <td>1.</td>
                                                 <td>{{ $aboutUs->description }}</td>
-                                                <td><img src="{{ asset($aboutUs->image_path) }}" width="100"></td>
+                                                <td><img src="{{ asset('storage/' . $aboutUs->image_path) }}"
+                                                        width="100"></td>
                                                 <td>
-                                                    <!-- Edit Badge -->
                                                     <a href="{{ route('admin.about-us.edit', $aboutUs) }}"
                                                         class="badge bg-warning text-dark">
                                                         <i class="bi bi-pencil-square"></i> Edit
                                                     </a>
-
-                                                    <!-- Hapus Badge -->
                                                     <button type="button" class="badge bg-danger text-white border-0"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#deleteModal{{ $aboutUs->id }}">
                                                         <i class="bi bi-trash"></i> Hapus
                                                     </button>
-
-                                                    <!-- Modal Konfirmasi Hapus -->
+                                                    <!-- Modal Hapus -->
                                                     <div class="modal fade" id="deleteModal{{ $aboutUs->id }}"
-                                                        tabindex="-1" aria-labelledby="deleteModalLabel"
-                                                        aria-hidden="true">
+                                                        tabindex="-1" aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title" id="deleteModalLabel">Konfirmasi
-                                                                        Hapus</h5>
+                                                                    <h5 class="modal-title">Konfirmasi Hapus</h5>
                                                                     <button type="button" class="btn-close"
-                                                                        data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        data-bs-dismiss="modal"></button>
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     Apakah Anda yakin ingin menghapus data ini?
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <!-- Tombol Cancel -->
-                                                                    <button type="button" class="btn btn-secondary"
-                                                                        data-bs-dismiss="modal">Batal</button>
-                                                                    <!-- Form Hapus -->
                                                                     <form
                                                                         action="{{ route('admin.about-us.destroy', $aboutUs->id) }}"
-                                                                        method="POST" style="display:inline-block;">
+                                                                        method="POST">
                                                                         @csrf
                                                                         @method('DELETE')
                                                                         <button type="submit"
                                                                             class="btn btn-danger">Hapus</button>
                                                                     </form>
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">Batal</button>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                        @else
+                                            <tr>
+                                                <td colspan="4">Tidak ada data About Us.</td>
+                                            </tr>
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
