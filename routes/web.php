@@ -1,17 +1,21 @@
 <?php
 
+use App\Models\Package;
+use App\Models\Background;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\WeddingPackageController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\OtherPackageController;
+use App\Http\Controllers\WeddingPackageController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\SelfPhotoPhotoboxPackageController;
 use App\Http\Controllers\Admin\AboutUsManagementController;
 use App\Http\Controllers\Admin\GalleryManagementController;
+use App\Http\Controllers\Admin\PackageManagementController;
+use App\Http\Controllers\SelfPhotoPhotoboxPackageController;
+use App\Http\Controllers\Admin\BackgroundManagementController;
 use App\Http\Controllers\Admin\PhotographerManagementController;
 use App\Http\Controllers\Admin\SelfPhotoPhotoboxManagementController;
 
@@ -67,6 +71,8 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::resource('galleries', GalleryManagementController::class);
     Route::resource('about-us', AboutUsManagementController::class);
     Route::resource('photographers', PhotographerManagementController::class)->except(['show']);
+    Route::resource('packages', PackageManagementController::class);
+    Route::resource('backgrounds', BackgroundManagementController::class);
 });
 
 Route::middleware('auth')->group(function () {

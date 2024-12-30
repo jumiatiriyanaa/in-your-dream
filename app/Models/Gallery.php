@@ -10,7 +10,10 @@ class Gallery extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['package_id', 'image_path'];
+    protected $fillable = [
+        'package_id',
+        'image_path'
+    ];
 
     public function package()
     {

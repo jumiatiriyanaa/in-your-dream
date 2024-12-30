@@ -175,7 +175,8 @@
 
             <!-- Studio -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="">
+                <a class="nav-link {{ request()->routeIs('admin.backgrounds.index') ? '' : 'collapsed' }}"
+                    href="{{ route('admin.backgrounds.index') }}">
                     <i class="bi bi-images"></i>
                     <span>Background</span>
                 </a>
@@ -183,7 +184,8 @@
 
             <!-- Package -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="">
+                <a class="nav-link {{ request()->routeIs('admin.packages.index') ? '' : 'collapsed' }}"
+                    href="{{ route('admin.packages.index') }}">
                     <i class="bi bi-plus-square"></i>
                     <span>Package</span>
                 </a>

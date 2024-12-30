@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Background extends Model
 {
     use HasFactory;
+
+    protected $table = 'backgrounds';
+
+    protected $fillable = [
+        'name',
+        'image_path',
+        'description',
+        'is_free',
+    ];
 }

@@ -9,7 +9,11 @@ class Package extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'price', 'desc'];
+    protected $fillable = [
+        'name',
+        'price',
+        'desc'
+    ];
 
     public function galleries()
     {

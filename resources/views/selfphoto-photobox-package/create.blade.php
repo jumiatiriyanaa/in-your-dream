@@ -54,7 +54,7 @@
                             <input type="radio" class="btn-check" name="background_choice"
                                 id="background{{ $background->id }}" value="{{ $background->name }}" required>
                             <label class="btn btn-outline-secondary w-100 border-0" for="background{{ $background->id }}">
-                                <img src="{{ $background->image_path ? asset($background->image_path) : 'https://via.placeholder.com/300' }}"
+                                <img src="{{ $background->image_path ? asset('storage/' . $background->image_path) : 'https://via.placeholder.com/300' }}"
                                     style="width: 300px; height: 300px; object-fit: cover;" class="img-fluid rounded mb-2"
                                     alt="{{ $background->name }}">
                                 <b class="mt-5">{{ $background->name }}</b> <br>

@@ -11,13 +11,13 @@ class AboutUsManagementController extends Controller
     public function index()
     {
         $aboutUs = AboutUs::latest()->first();
-        return view('admin.about_us.index', compact('aboutUs'));
+        return view('admin.about-us.index', compact('aboutUs'));
     }
 
     public function edit()
     {
         $aboutUs = AboutUs::latest()->first();
-        return view('admin.about_us.edit', compact('aboutUs'));
+        return view('admin.about-us.edit', compact('aboutUs'));
     }
 
     public function update(Request $request, AboutUs $aboutUs)
@@ -45,7 +45,7 @@ class AboutUsManagementController extends Controller
 
     public function create()
     {
-        return view('admin.about_us.create');
+        return view('admin.about-us.create');
     }
 
     public function store(Request $request)

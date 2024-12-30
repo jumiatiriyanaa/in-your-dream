@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\AboutUs;
 use App\Models\Gallery;
 use App\Models\Package;
+use App\Models\Background;
 use App\Models\OtherPackage;
 use App\Models\WeddingPackage;
 use App\Http\Controllers\Controller;
@@ -18,6 +19,7 @@ class DashboardController extends Controller
         $totalAboutUs = AboutUs::count();
         $totalPackages = Package::count();
         $totalGalleries = Gallery::count();
+        $totalBackgrounds = Background::count();
         $totalUsersLevel0 = User::where('level', 0)->count();
 
         $totalOtherPackages = OtherPackage::count();
@@ -26,6 +28,6 @@ class DashboardController extends Controller
 
         $totalReservation = $totalOtherPackages + $totalWeddingPackages + $totalSelfPhotoPhotoboxPackages;
 
-        return view('admin.dashboard', compact('totalAboutUs', 'totalPackages', 'totalGalleries', 'totalUsersLevel0', 'totalReservation'));
+        return view('admin.dashboard', compact('totalAboutUs', 'totalPackages', 'totalGalleries', 'totalBackgrounds', 'totalUsersLevel0', 'totalReservation'));
     }
 }
