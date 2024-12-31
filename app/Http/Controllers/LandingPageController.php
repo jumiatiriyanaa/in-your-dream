@@ -15,11 +15,4 @@ class LandingPageController extends Controller
 
         return view('landing-page', compact('aboutUs', 'sliderImages'));
     }
-
-    public function getSliderImages()
-    {
-        $sliderImages = Gallery::limit(5)->get();
-
-        return view('landing-page', compact('sliderImages'));
-    }
 }

@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Package;
-use App\Models\Background;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
@@ -20,7 +18,6 @@ use App\Http\Controllers\SelfPhotoPhotoboxPackageController;
 use App\Http\Controllers\Admin\BackgroundManagementController;
 use App\Http\Controllers\Admin\ReservationManagementController;
 use App\Http\Controllers\Admin\PhotographerManagementController;
-use App\Http\Controllers\Admin\SelfPhotoPhotoboxManagementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,48 +30,25 @@ use App\Http\Controllers\Admin\SelfPhotoPhotoboxManagementController;
 |
 */
 
-Route::get('/', function () {
-    return view('landing-page');
+Route::get('/', [LandingPageController::class, 'index'])->name('home');
+Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
+Route::view('/pricelist', 'pricelist');
+
+Route::prefix('auth')->group(function () {
+    Route::get('google', [AuthController::class, 'redirectToGoogle']);
+    Route::get('google/callback', [AuthController::class, 'handleGoogleCallback']);
 });
 
-Route::get('/', [LandingPageController::class, 'aboutUs'])->name('home');
-Route::get('/', [LandingPageController::class, 'getSliderImages'])->name('home');
-
-Route::get('auth/google', [AuthController::class, 'redirectToGoogle']);
-Route::get('auth/google/callback', [AuthController::class, 'handleGoogleCallback']);
-
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
-
-Route::get('/register', function () {
-    return view('auth.register');
-})->name('register');
-
-Route::get('/home', [HomeController::class, 'aboutUs'])->name('home');
-Route::get('/home', [HomeController::class, 'getSliderImages'])->name('home');
-Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
-
-Route::get('/pricelist', function () {
-    return view('pricelist');
-});
+Route::get('/login', fn() => view('auth.login'))->name('login');
+Route::get('/register', fn() => view('auth.register'))->name('register');
 
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-
-Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
-    Route::resource('reservations', ReservationManagementController::class);
-    Route::resource('galleries', GalleryManagementController::class);
-    Route::resource('photographers', PhotographerManagementController::class);
-    Route::resource('backgrounds', BackgroundManagementController::class);
-    Route::resource('packages', PackageManagementController::class);
-    Route::resource('about-us', AboutUsManagementController::class);
-});
-
 Route::middleware('auth')->group(function () {
+    Route::get('home', [HomeController::class, 'index'])->name('home');
+
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -105,4 +79,14 @@ Route::middleware('auth')->group(function () {
     Route::post('other-package/upload-proof', [OtherPackageController::class, 'uploadProof'])->name('other-package.upload-proof');
     Route::get('other-package/resi/{id}', [OtherPackageController::class, 'showResi'])->name('other-package.resi');
     Route::post('other-package/confirm/{id}', [OtherPackageController::class, 'confirm'])->name('other-package.confirm');
+});
+
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('reservations', ReservationManagementController::class);
+    Route::resource('galleries', GalleryManagementController::class);
+    Route::resource('photographers', PhotographerManagementController::class);
+    Route::resource('backgrounds', BackgroundManagementController::class);
+    Route::resource('packages', PackageManagementController::class);
+    Route::resource('about-us', AboutUsManagementController::class);
 });

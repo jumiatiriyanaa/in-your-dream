@@ -30,7 +30,7 @@
                     <div class="row">
                         <!-- About Us Image -->
                         <div class="col-lg-6 mb-4 mb-lg-0">
-                            <img src="{{ !empty($aboutUs->image_path) ? asset($aboutUs->image_path) : asset('img/aboutus.png') }}"
+                            <img src="{{ !empty($aboutUs->image_path) ? asset('storage/' . $aboutUs->image_path) : asset('img/aboutus.png') }}"
                                 alt="About Us Image" class="img-fluid img-overlap" data-aos="zoom-out" />
                         </div>
                         <!-- About Us Description -->
