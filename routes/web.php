@@ -33,11 +33,6 @@ use App\Http\Controllers\Admin\SelfPhotoPhotoboxManagementController;
 |
 */
 
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/selfphoto', [SelfPhotoPhotoboxManagementController::class, 'index'])->name('selfphoto.index');
-    Route::delete('/selfphoto/{id}', [SelfPhotoPhotoboxManagementController::class, 'destroy'])->name('selfphoto.destroy');
-});
-
 Route::get('/', function () {
     return view('landing-page');
 });
@@ -84,11 +79,11 @@ Route::middleware('auth')->group(function () {
     Route::get('profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
 
-    Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations.index');
-    Route::post('/reservations/{reservation}/cancel', [ReservationController::class, 'cancel'])->name('reservations.cancel');
+    Route::get('reservations', [ReservationController::class, 'index'])->name('reservations.index');
+    Route::post('reservations/{reservation}/cancel', [ReservationController::class, 'cancel'])->name('reservations.cancel');
 
-    Route::get('/ratings/{reservationId}/create', [RatingController::class, 'create'])->name('ratings.create');
-    Route::post('/ratings/{reservationId}/store', [RatingController::class, 'store'])->name('ratings.store');
+    Route::get('ratings/{reservationId}/create', [RatingController::class, 'create'])->name('ratings.create');
+    Route::post('ratings/{reservationId}/store', [RatingController::class, 'store'])->name('ratings.store');
 
     Route::get('selfphoto-photobox-package', [SelfPhotoPhotoboxPackageController::class, 'create'])->name('selfphoto-photobox-package.create');
     Route::post('selfphoto-photobox-package/store', [SelfPhotoPhotoboxPackageController::class, 'store'])->name('selfphoto-photobox-package.store');
