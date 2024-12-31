@@ -238,3 +238,31 @@ body {
     border-radius: 50%;
     margin-bottom: 20px;
 }
+
+/* Rating */
+.star-rating {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.star-input {
+    display: none;
+}
+
+.star-label {
+    font-size: 3rem;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.star-input:checked ~ .star-label {
+    color: #ffc107;
+}
+
+.star-label:hover,
+.star-label:hover ~ .star-label {
+    color: #ffc107;
+}

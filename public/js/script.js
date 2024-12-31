@@ -92,3 +92,49 @@ function copyAccountNumber() {
             console.error("Gagal menyalin nomor rekening: ", err);
         });
 }
+
+// Rating
+document.addEventListener("DOMContentLoaded", () => {
+    const stars = document.querySelectorAll(".star-input");
+    const labels = document.querySelectorAll(".star-label");
+
+    function updateStarsOnHover(index) {
+        labels.forEach((label, idx) => {
+            if (idx <= index) {
+                label.style.color = "#ffc107";
+            } else {
+                label.style.color = "#ccc";
+            }
+        });
+    }
+
+    function updateStarsOnClick(index) {
+        labels.forEach((label, idx) => {
+            if (idx <= index) {
+                label.style.color = "#ffc107";
+            } else {
+                label.style.color = "#ccc";
+            }
+        });
+    }
+
+    labels.forEach((label, index) => {
+        label.addEventListener("mouseover", () => {
+            updateStarsOnHover(index);
+        });
+
+        label.addEventListener("mouseleave", () => {
+            const selectedStar = document.querySelector(".star-input:checked");
+            const selectedIndex = selectedStar
+                ? Array.from(stars).indexOf(selectedStar)
+                : -1;
+            updateStarsOnClick(selectedIndex);
+        });
+    });
+
+    stars.forEach((star, index) => {
+        star.addEventListener("change", () => {
+            updateStarsOnClick(index);
+        });
+    });
+});

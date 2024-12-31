@@ -5,9 +5,11 @@ use App\Models\Background;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RatingController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\OtherPackageController;
 use App\Http\Controllers\WeddingPackageController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -81,6 +83,12 @@ Route::middleware('auth')->group(function () {
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
+
+    Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations.index');
+    Route::post('/reservations/{reservation}/cancel', [ReservationController::class, 'cancel'])->name('reservations.cancel');
+
+    Route::get('/ratings/{reservationId}/create', [RatingController::class, 'create'])->name('ratings.create');
+    Route::post('/ratings/{reservationId}/store', [RatingController::class, 'store'])->name('ratings.store');
 
     Route::get('selfphoto-photobox-package', [SelfPhotoPhotoboxPackageController::class, 'create'])->name('selfphoto-photobox-package.create');
     Route::post('selfphoto-photobox-package/store', [SelfPhotoPhotoboxPackageController::class, 'store'])->name('selfphoto-photobox-package.store');

@@ -30,4 +30,9 @@ class Reservation extends Model
     {
         return $this->morphTo();
     }
+
+    public function rating()
+    {
+        return $this->hasOne(Rating::class, 'reservation_id');
+    }
 }

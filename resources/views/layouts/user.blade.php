@@ -48,9 +48,10 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                                 <li><a class="dropdown-item" href="{{ route('profile.index') }}">Profile</a></li>
+                                <li><a class="dropdown-item" href="{{ route('reservations.index') }}">Reservation</a></li>
                                 <li><a class="dropdown-item text-danger" href="{{ route('logout') }}"
                                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        Keluar</a></li>
+                                        Logout</a></li>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                     style="display: none;">
                                     @csrf
