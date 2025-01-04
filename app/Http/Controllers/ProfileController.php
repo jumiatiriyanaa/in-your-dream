@@ -59,6 +59,6 @@ class ProfileController extends Controller
 
         $user->save();
 
-        return redirect()->route('profile.index')->with('success', 'Profile updated successfully.');
+        return redirect()->route('profile.index')->with('success', 'Profil berhasil diperbarui.');
     }
 }

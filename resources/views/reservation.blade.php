@@ -40,7 +40,7 @@
                     </div>
                 @endif
 
-                <h2 class="section-title mt-4">Reservation Status</h2>
+                <h2 class="section-title mt-4">Current Reservation</h2>
 
                 @if ($currentReservation)
                     <!-- Current Reservation -->

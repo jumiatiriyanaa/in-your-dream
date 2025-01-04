@@ -33,7 +33,7 @@ class ReservationController extends Controller
             ?? OtherPackage::find($reservationId);
 
         if (!$reservation) {
-            return redirect()->route('reservations.index')->with('error', 'Reservation not found.');
+            return redirect()->route('reservations.index')->with('error', 'Reservasi tidak ditemukan.');
         }
 
         $reservation->update(['status' => 'Cancelled']);
@@ -41,6 +41,6 @@ class ReservationController extends Controller
         Reservation::where('package_id', $reservation->id)
             ->update(['status' => 'Cancelled']);
 
-        return redirect()->route('reservations.index')->with('success', 'Reservation has been cancelled successfully.');
+        return redirect()->route('reservations.index')->with('success', 'Reservasi telah berhasil dibatalkan.');
     }
 }

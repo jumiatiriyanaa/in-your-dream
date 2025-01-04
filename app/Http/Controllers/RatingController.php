@@ -13,7 +13,7 @@ class RatingController extends Controller
         $reservation = Reservation::findOrFail($reservationId);
 
         if ($reservation->status !== 'Reserved') {
-            return redirect()->route('reservations.index')->with('error', 'You can only rate reserved packages.');
+            return redirect()->route('reservations.index')->with('error', 'Anda hanya dapat menilai paket yang dengan status Reserved.');
         }
 
         return view('rating', compact('reservation'));
@@ -34,6 +34,6 @@ class RatingController extends Controller
             'review' => $request->input('review'),
         ]);
 
-        return redirect()->route('reservations.index')->with('success', 'Thank you for your rating and review!');
+        return redirect()->route('reservations.index')->with('success', 'Terima kasih atas penilaian dan ulasan Anda!');
     }
 }

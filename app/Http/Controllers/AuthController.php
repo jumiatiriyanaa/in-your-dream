@@ -42,7 +42,7 @@ class AuthController extends Controller
             Auth::login($user);
             return redirect()->intended('/home');
         } catch (\Exception $e) {
-            return redirect()->route('login')->withErrors(['login' => 'Failed to login with Google.']);
+            return redirect()->route('login')->withErrors(['login' => 'Gagal login dengan Google.']);
         }
     }
 
