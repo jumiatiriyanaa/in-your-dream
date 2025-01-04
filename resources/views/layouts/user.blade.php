@@ -108,7 +108,7 @@
                         <h4>Useful Links</h4>
                         <ul>
                             <li><a href="/home">Home</a></li>
-                            <li><a href="/#about">About us</a></li>
+                            <li><a href="/about-us">About us</a></li>
                             <li><a href="/gallery">Gallery</a></li>
                             <li><a href="/pricelist">Pricelist</a></li>
                         </ul>
