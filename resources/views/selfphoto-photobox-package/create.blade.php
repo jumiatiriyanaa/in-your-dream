@@ -96,6 +96,12 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const scheduleDate = document.getElementById('schedule_date');
+            const today = new Date().toISOString().split('T')[0];
+            scheduleDate.setAttribute('min', today);
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const scheduleDate = document.getElementById('schedule_date');
             const scheduleTime = document.getElementById('schedule_time');
 
             scheduleDate.addEventListener('change', checkReservation);
