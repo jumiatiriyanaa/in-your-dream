@@ -90,13 +90,14 @@
                 <label for="payment_method" class="form-label">Metode Pembayaran</label>
                 <select id="payment_method" name="payment_method" class="form-select">
                     <option value="" disabled selected>Pilih Metode Pembayaran</option>
-                    <option value="Transfer">Transfer</option>
                     <option value="Cash">Cash</option>
+                    <option value="Transfer">Transfer</option>
+                    <option value="Dompet Digital">Dompet Digital</option>
                 </select>
             </div>
 
             <div class="col-md-12">
-                <button type="submit" class="btn btn-dark w-100">Lanjutkan</button>
+                <button type="submit" class="btn-booking">Lanjutkan</button>
             </div>
         </form>
     </div>

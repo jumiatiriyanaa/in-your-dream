@@ -39,7 +39,7 @@
                     <li><a href="/home" class="{{ Request::is('home') ? 'active' : '' }}">Home</a></li>
                     <li><a href="/gallery" class="{{ Request::is('gallery') ? 'active' : '' }}">Gallery</a></li>
                     <li><a href="/pricelist" class="{{ Request::is('pricelist') ? 'active' : '' }}">Pricelist</a></li>
-                    <li><a href="/home#about" class="{{ Request::is('home#about') ? 'active' : '' }}">About Us</a></li>
+                    <li><a href="/#about" class="{{ Request::is('home#about') ? 'active' : '' }}">About Us</a></li>
                     @auth
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -88,7 +88,7 @@
                         <h4>Useful Links</h4>
                         <ul>
                             <li><a href="/home">Home</a></li>
-                            <li><a href="/home#about">About us</a></li>
+                            <li><a href="/#about">About us</a></li>
                             <li><a href="/gallery">Gallery</a></li>
                             <li><a href="/pricelist">Pricelist</a></li>
                         </ul>

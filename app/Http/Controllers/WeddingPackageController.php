@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Midtrans\Snap;
+use Midtrans\Config;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Models\WeddingPackage;
@@ -54,6 +56,48 @@ class WeddingPackageController extends Controller
 
         if ($request->payment_method === 'Transfer') {
             return redirect()->route('wedding-package.transfer', ['id' => $reservation->id]);
+        }
+
+        if ($request->payment_method === 'Dompet Digital') {
+            Config::$serverKey = 'SB-Mid-server-PFqveuiCIhGPe0SxcHDtGmyq';
+            Config::$clientKey = 'SB-Mid-client-I8cZwkRdtdh36Q72';
+            Config::$isProduction = false;
+
+            $transaction_details = [
+                'order_id' => 'ORDER-' . $reservation->id,
+                'gross_amount' => $total_price,
+            ];
+
+            $item_details = [
+                [
+                    'id' => 'item01',
+                    'price' => $total_price,
+                    'quantity' => 1,
+                    'name' => 'Wedding Package Reservation',
+                ],
+            ];
+
+            $customer_details = [
+                'first_name' => $user->name,
+                'email' => $user->email,
+                'phone' => $user->phone_number,
+            ];
+
+            $payment_type = 'digital_wallet';
+            $transaction = [
+                'payment_type' => $payment_type,
+                'transaction_details' => $transaction_details,
+                'item_details' => $item_details,
+                'customer_details' => $customer_details,
+            ];
+
+            try {
+                $snap_token = Snap::getSnapToken($transaction);
+
+                return view('wedding-package.midtrans', compact('snap_token', 'reservation'));
+            } catch (\Exception $e) {
+                return redirect()->route('wedding-package.create')->with('error', 'Terjadi kesalahan saat proses pembayaran.');
+            }
         }
 
         return redirect()->route('wedding-package.resi', ['id' => $reservation->id]);

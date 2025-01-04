@@ -72,6 +72,7 @@ Route::middleware('auth')->group(function () {
     Route::post('wedding-package/upload-proof', [WeddingPackageController::class, 'uploadProof'])->name('wedding-package.upload-proof');
     Route::get('wedding-package/resi/{id}', [WeddingPackageController::class, 'showResi'])->name('wedding-package.resi');
     Route::post('wedding-package/confirm/{id}', [WeddingPackageController::class, 'confirm'])->name('wedding-package.confirm');
+    Route::get('wedding-package/midtrans/{id}', [WeddingPackageController::class, 'midtrans'])->name('wedding-package.midtrans');
 
     Route::get('other-package', [OtherPackageController::class, 'create'])->name('other-package.create');
     Route::post('other-package/store', [OtherPackageController::class, 'store'])->name('other-package.store');
