@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Midtrans\Snap;
+use Midtrans\Config;
 use App\Models\Background;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
@@ -11,6 +13,13 @@ use App\Models\SelfPhotoPhotoboxPackage;
 
 class SelfPhotoPhotoboxPackageController extends Controller
 {
+    public function __construct()
+    {
+        Config::$serverKey = env('MIDTRANS_SERVER_KEY');
+        Config::$isSanitized = true;
+        Config::$is3ds = true;
+    }
+
     public function create()
     {
         $user = Auth::user();
@@ -55,10 +64,50 @@ class SelfPhotoPhotoboxPackageController extends Controller
         $reservation = SelfPhotoPhotoboxPackage::create($validated);
 
         if ($request->payment_method === 'Transfer') {
-            return redirect()->route('selfphoto-photobox-package.transfer', ['id' => $reservation->id]);
+            return redirect()->route('selfphoto-photobox.transfer', ['id' => $reservation->id]);
+        } elseif ($request->payment_method === 'Dompet Digital') {
+            return redirect()->route('selfphoto-photobox.midtrans', ['id' => $reservation->id]);
         }
 
         return redirect()->route('selfphoto-photobox-package.resi', ['id' => $reservation->id]);
+    }
+
+    private function generateUniqueOrderId($prefix = 'SPP', $length = 10)
+    {
+        do {
+            $randomNumbers = substr(str_shuffle('0123456789'), 0, $length);
+            $orderId = $prefix . $randomNumbers;
+
+            $exists = SelfPhotoPhotoboxPackage::where('order_id', $orderId)->exists();
+        } while ($exists);
+
+        return $orderId;
+    }
+
+    public function midtrans($id)
+    {
+        $reservation = SelfPhotoPhotoboxPackage::findOrFail($id);
+
+        $orderId = $this->generateUniqueOrderId();
+
+        $reservation->order_id = $orderId;
+        $reservation->save();
+
+        $transactionDetails = [
+            'transaction_details' => [
+                'order_id' => $orderId,
+                'gross_amount' => $reservation->total_price,
+            ],
+            'customer_details' => [
+                'first_name' => $reservation->user->name,
+                'email' => $reservation->user->email,
+                'phone' => $reservation->user->phone_number,
+            ],
+        ];
+
+        $snapToken = Snap::getSnapToken($transactionDetails);
+
+        return view('selfphoto-photobox-package.midtrans', compact('reservation', 'snapToken'));
     }
 
     public function transfer($id)

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Midtrans\Snap;
+use Midtrans\Config;
 use App\Models\Package;
 use App\Models\Reservation;
 use App\Models\OtherPackage;
@@ -11,6 +13,13 @@ use Illuminate\Support\Facades\Auth;
 
 class OtherPackageController extends Controller
 {
+    public function __construct()
+    {
+        Config::$serverKey = env('MIDTRANS_SERVER_KEY');
+        Config::$isSanitized = true;
+        Config::$is3ds = true;
+    }
+
     public function create()
     {
         $user = Auth::user();
@@ -43,15 +52,54 @@ class OtherPackageController extends Controller
         $validated['admin_fee'] = $admin_fee;
         $validated['total_price'] = $total_price;
         $validated['status'] = 'Pending';
-        $validated['payment_method'] = $request->payment_method;
 
         $reservation = OtherPackage::create($validated);
 
         if ($request->payment_method === 'Transfer') {
             return redirect()->route('other-package.transfer', ['id' => $reservation->id]);
+        } elseif ($request->payment_method === 'Dompet Digital') {
+            return redirect()->route('other-package.midtrans', ['id' => $reservation->id]);
         }
 
         return redirect()->route('other-package.resi', ['id' => $reservation->id]);
+    }
+
+    private function generateUniqueOrderId($prefix = 'WP', $length = 10)
+    {
+        do {
+            $randomNumbers = substr(str_shuffle('0123456789'), 0, $length);
+            $orderId = $prefix . $randomNumbers;
+
+            $exists = OtherPackage::where('order_id', $orderId)->exists();
+        } while ($exists);
+
+        return $orderId;
+    }
+
+    public function midtrans($id)
+    {
+        $reservation = OtherPackage::findOrFail($id);
+
+        $orderId = $this->generateUniqueOrderId();
+
+        $reservation->order_id = $orderId;
+        $reservation->save();
+
+        $transactionDetails = [
+            'transaction_details' => [
+                'order_id' => $orderId,
+                'gross_amount' => $reservation->total_price,
+            ],
+            'customer_details' => [
+                'first_name' => $reservation->user->name,
+                'email' => $reservation->user->email,
+                'phone' => $reservation->user->phone_number,
+            ],
+        ];
+
+        $snapToken = Snap::getSnapToken($transactionDetails);
+
+        return view('other-package.midtrans', compact('reservation', 'snapToken'));
     }
 
     public function transfer($id)

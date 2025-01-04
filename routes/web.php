@@ -65,6 +65,7 @@ Route::middleware('auth')->group(function () {
     Route::post('selfphoto-photobox-package/upload-proof', [SelfPhotoPhotoboxPackageController::class, 'uploadProof'])->name('selfphoto-photobox-package.upload-proof');
     Route::get('selfphoto-photobox-package/resi/{id}', [SelfPhotoPhotoboxPackageController::class, 'showResi'])->name('selfphoto-photobox-package.resi');
     Route::post('selfphoto-photobox-package/confirm/{id}', [SelfPhotoPhotoboxPackageController::class, 'confirm'])->name('selfphoto-photobox-package.confirm');
+    Route::get('selfphoto-photobox-package/midtrans/{id}', [SelfPhotoPhotoboxPackageController::class, 'midtrans'])->name('selfphoto-photobox.midtrans');
 
     Route::get('wedding-package', [WeddingPackageController::class, 'create'])->name('wedding-package.create');
     Route::post('wedding-package/store', [WeddingPackageController::class, 'store'])->name('wedding-package.store');
@@ -80,6 +81,7 @@ Route::middleware('auth')->group(function () {
     Route::post('other-package/upload-proof', [OtherPackageController::class, 'uploadProof'])->name('other-package.upload-proof');
     Route::get('other-package/resi/{id}', [OtherPackageController::class, 'showResi'])->name('other-package.resi');
     Route::post('other-package/confirm/{id}', [OtherPackageController::class, 'confirm'])->name('other-package.confirm');
+    Route::get('other-package/midtrans/{id}', [OtherPackageController::class, 'midtrans'])->name('other-package.midtrans');
 });
 
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
