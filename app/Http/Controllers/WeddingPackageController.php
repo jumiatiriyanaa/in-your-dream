@@ -12,6 +12,13 @@ use Illuminate\Support\Facades\Auth;
 
 class WeddingPackageController extends Controller
 {
+    public function __construct()
+    {
+        Config::$serverKey = env('MIDTRANS_SERVER_KEY');
+        Config::$isSanitized = true;
+        Config::$is3ds = true;
+    }
+
     public function create()
     {
         $user = Auth::user();
@@ -56,51 +63,49 @@ class WeddingPackageController extends Controller
 
         if ($request->payment_method === 'Transfer') {
             return redirect()->route('wedding-package.transfer', ['id' => $reservation->id]);
-        }
-
-        if ($request->payment_method === 'Dompet Digital') {
-            Config::$serverKey = 'SB-Mid-server-PFqveuiCIhGPe0SxcHDtGmyq';
-            Config::$clientKey = 'SB-Mid-client-I8cZwkRdtdh36Q72';
-            Config::$isProduction = false;
-
-            $transaction_details = [
-                'order_id' => 'ORDER-' . $reservation->id,
-                'gross_amount' => $total_price,
-            ];
-
-            $item_details = [
-                [
-                    'id' => 'item01',
-                    'price' => $total_price,
-                    'quantity' => 1,
-                    'name' => 'Wedding Package Reservation',
-                ],
-            ];
-
-            $customer_details = [
-                'first_name' => $user->name,
-                'email' => $user->email,
-                'phone' => $user->phone_number,
-            ];
-
-            $payment_type = 'digital_wallet';
-            $transaction = [
-                'payment_type' => $payment_type,
-                'transaction_details' => $transaction_details,
-                'item_details' => $item_details,
-                'customer_details' => $customer_details,
-            ];
-
-            try {
-                $snap_token = Snap::getSnapToken($transaction);
-
-                return view('wedding-package.midtrans', compact('snap_token', 'reservation'));
-            } catch (\Exception $e) {
-                return redirect()->route('wedding-package.create')->with('error', 'Terjadi kesalahan saat proses pembayaran.');
-            }
+        } elseif ($request->payment_method === 'Dompet Digital') {
+            return redirect()->route('wedding-package.midtrans', ['id' => $reservation->id]);
         }
 
         return redirect()->route('wedding-package.resi', ['id' => $reservation->id]);
+    }
+
+    private function generateUniqueOrderId($prefix = 'WP', $length = 10)
+    {
+        do {
+            $randomNumbers = substr(str_shuffle('0123456789'), 0, $length);
+            $orderId = $prefix . $randomNumbers;
+
+            $exists = WeddingPackage::where('order_id', $orderId)->exists();
+        } while ($exists);
+
+        return $orderId;
+    }
+
+    public function midtrans($id)
+    {
+        $reservation = WeddingPackage::findOrFail($id);
+
+        $orderId = $this->generateUniqueOrderId();
+
+        $reservation->order_id = $orderId;
+        $reservation->save();
+
+        $transactionDetails = [
+            'transaction_details' => [
+                'order_id' => $orderId,
+                'gross_amount' => $reservation->total_price,
+            ],
+            'customer_details' => [
+                'first_name' => $reservation->user->name,
+                'email' => $reservation->user->email,
+                'phone' => $reservation->user->phone_number,
+            ],
+        ];
+
+        $snapToken = Snap::getSnapToken($transactionDetails);
+
+        return view('wedding-package.midtrans', compact('reservation', 'snapToken'));
     }
 
     public function transfer($id)

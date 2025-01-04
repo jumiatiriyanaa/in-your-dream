@@ -1,38 +1,38 @@
 @extends('layouts.user')
 
-@section('title', 'Pembayaran Wedding Package')
+@section('title', 'Pembayaran Dompet Digital')
 
 @section('content')
     <div class="container mt-5 mb-5">
-        <h1 class="section-title text-center mb-4">Pembayaran Wedding Package</h1>
-        <div class="alert alert-info">
-            Silahkan lanjutkan pembayaran menggunakan metode Dompet Digital.
-        </div>
+        <h1 class="text-center">Pembayaran Dompet Digital</h1>
+        <p class="text-center">Silakan lakukan pembayaran untuk menyelesaikan transaksi Anda.</p>
 
-        <button id="pay-button" class="btn-booking w-100">Bayar dengan Dompet Digital</button>
+        <div id="payment-button" class="text-center mt-4">
+            <button id="pay-button" class="btn-booking">Bayar Sekarang</button>
+        </div>
     </div>
 
-    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
-        data-client-key="SB-Mid-client-I8cZwkRdtdh36Q72"></script>
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key="{{ config('services.midtrans.client_key') }}"></script>
     <script type="text/javascript">
-        document.getElementById('pay-button').onclick = function() {
-            console.log('Button clicked!');
-            snap.pay('{{ $snap_token }}', {
+        var payButton = document.getElementById('pay-button');
+        payButton.addEventListener('click', function() {
+            window.snap.pay('{{ $snapToken }}', {
                 onSuccess: function(result) {
-                    console.log('Success:', result);
-                    alert('Pembayaran berhasil: ' + JSON.stringify(result));
                     window.location.href =
                         "{{ route('wedding-package.resi', ['id' => $reservation->id]) }}";
                 },
                 onPending: function(result) {
-                    console.log('Pending:', result);
-                    alert('Pembayaran tertunda: ' + JSON.stringify(result));
+                    window.location.href =
+                        "{{ route('wedding-package.resi', ['id' => $reservation->id]) }}";
                 },
                 onError: function(result) {
-                    console.log('Error:', result);
-                    alert('Pembayaran gagal: ' + JSON.stringify(result));
+                    alert('Pembayaran gagal. Silakan coba lagi.');
+                },
+                onClose: function() {
+                    alert('Anda menutup pembayaran tanpa menyelesaikannya.');
                 }
             });
-        };
+        });
     </script>
 @endsection

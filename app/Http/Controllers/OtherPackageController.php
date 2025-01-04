@@ -64,7 +64,7 @@ class OtherPackageController extends Controller
         return redirect()->route('other-package.resi', ['id' => $reservation->id]);
     }
 
-    private function generateUniqueOrderId($prefix = 'WP', $length = 10)
+    private function generateUniqueOrderId($prefix = 'OP', $length = 10)
     {
         do {
             $randomNumbers = substr(str_shuffle('0123456789'), 0, $length);

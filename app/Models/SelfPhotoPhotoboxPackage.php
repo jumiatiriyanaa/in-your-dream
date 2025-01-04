@@ -24,6 +24,7 @@ class SelfPhotoPhotoboxPackage extends Model
         'admin_fee',
         'total_price',
         'payment_proof',
+        'order_id',
         'status'
     ];
 
