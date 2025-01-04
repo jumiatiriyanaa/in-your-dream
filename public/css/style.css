@@ -266,3 +266,99 @@ body {
 .star-label:hover ~ .star-label {
     color: #ffc107;
 }
+
+/* About Section */
+.about.section {
+    padding: 60px 0;
+}
+
+.about h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.about .text-dark {
+    color: #555;
+    line-height: 1.8;
+}
+
+.img-overlap {
+    border-radius: 10px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Meet Our Team Section */
+.team.section {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.team-member {
+    background: #6e593c;
+    border-radius: 15px;
+    color: white;
+    padding: 20px 10px;
+    margin: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: inline-block;
+    width: 100%;
+    max-width: 200px;
+}
+
+.team-member:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.team-icon img {
+    width: 50%;
+    height: auto;
+}
+
+.team-member h4 {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.team-member p {
+    font-size: 0.9rem;
+    color: #e0d9d9;
+    margin: 0;
+}
+
+/* Testimonials Section */
+.testimonials {
+    background: url("../img/camera.png") no-repeat center center;
+    background-size: cover;
+    padding: 100px 20px;
+    color: white;
+}
+
+.testimonials h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.testimonials p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.btn-dark {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-dark:hover {
+    background-color: #555;
+}

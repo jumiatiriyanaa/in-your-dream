@@ -36,7 +36,7 @@
                                     <span class="number"><span class="text-white">01</span></span>
                                     <h3 class="text-center mb-4">Photobox / Self Photo</h3>
                                     <div class="container text-center">
-                                        <img src="{{ asset('guest/img/photobox.png') }}" alt="" width="100">
+                                        <img src="{{ asset('img/photobox.png') }}" alt="" width="100">
                                     </div>
                                     <div class="service-item-card-content">
                                         <li>1 - 4 orang</li>
@@ -53,7 +53,7 @@
                                     <h3 class="text-center mb-4">Wedding Package</h3>
                                     <span class="number"><span class="text-white">02</span></span>
                                     <div class="container text-center">
-                                        <img src="{{ asset('guest/img/wedding.svg') }}" alt="" width="100">
+                                        <img src="{{ asset('img/wedding.svg') }}" alt="" width="100">
                                     </div>
                                     <div class="service-item-card-content mt-3">
                                         <li>Akad</li>
@@ -72,7 +72,7 @@
                                     <span class="number"><span class="text-white">03</span></span>
                                     <h3 class="text-center mb-4">Other Package</h3>
                                     <div class="container text-center">
-                                        <img src="{{ asset('guest/img/order.png') }}" alt="" width="100">
+                                        <img src="{{ asset('img/other.png') }}" alt="" width="100">
                                     </div>
                                     <div class="service-item-card-content mt-3">
                                         <ul>

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RatingController;
+use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LandingPageController;
@@ -33,6 +34,7 @@ use App\Http\Controllers\Admin\PhotographerManagementController;
 Route::get('/', [LandingPageController::class, 'index'])->name('home');
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 Route::view('/pricelist', 'pricelist');
+Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us');
 
 Route::prefix('auth')->group(function () {
     Route::get('google', [AuthController::class, 'redirectToGoogle']);
