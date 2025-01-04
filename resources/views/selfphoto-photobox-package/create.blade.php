@@ -77,8 +77,9 @@
                 <label for="payment_method" class="form-label">Metode Pembayaran</label>
                 <select class="form-select" id="payment_method" name="payment_method" required>
                     <option value="" disabled selected>Pilih Metode Pembayaran</option>
-                    <option value="Transfer">Transfer</option>
                     <option value="Cash">Cash</option>
+                    <option value="Transfer">Transfer</option>
+                    <option value="Dompet Digital">Dompet Digital</option>
                 </select>
             </div>
 
