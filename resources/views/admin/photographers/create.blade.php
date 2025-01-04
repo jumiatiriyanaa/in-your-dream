@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Tambah Photographer')
+@section('title', 'Tambah Data Photographer')
 
 @section('content')
     <div class="pagetitle">
