@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 04, 2025 at 06:34 AM
+-- Generation Time: Jan 04, 2025 at 09:59 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -35,13 +35,6 @@ CREATE TABLE `about_us` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `about_us`
---
-
-INSERT INTO `about_us` (`id`, `description`, `image_path`, `created_at`, `updated_at`) VALUES
-(1, 'In Your Dream adalah studio foto profesional yang berlokasi di kota Bengkalis, tempat di mana momen-momen istimewa Anda diabadikan dengan sepenuh hati. IYD Studio menawarkan layanan fotografi untuk berbagai keperluan, mulai dari pemotretan pernikahan, potret pribadi dan keluarga, hingga acara-acara spesial lainnya.', 'about_us/XvCllK0mzabzGYfb6q7As6uopYBCDgzAN6O4CcmN.png', '2024-12-30 14:31:11', '2024-12-30 14:31:11');
-
 -- --------------------------------------------------------
 
 --
@@ -57,17 +50,6 @@ CREATE TABLE `backgrounds` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `backgrounds`
---
-
-INSERT INTO `backgrounds` (`id`, `name`, `image_path`, `description`, `is_free`, `created_at`, `updated_at`) VALUES
-(1, 'Red Photobox', 'background/comXdER3i289JCKgxePqYwKVPtNxC9lpKTQyHdAA.png', 'Background Gratis', 1, '2024-12-30 10:22:39', '2024-12-30 10:22:39'),
-(2, 'Green Photobox', 'background/SSujb0Ye99Q5R8HEkKW0qqK5Kh9xPzqN23x6v2Gm.png', 'Background Gratis', 1, '2024-12-30 10:23:05', '2024-12-30 10:23:05'),
-(3, 'Abstract 1', 'background/pX2IYaybCmyb0axYBebI3gsbWorWdsiDi5qCG9QN.jpg', 'Background Gratis', 1, '2024-12-30 10:23:41', '2024-12-30 10:23:41'),
-(4, 'Abstract 2', 'background/1DG1dNlER2AUrJ28KusSW0Cr0tTYIHbBDggRQXSz.jpg', 'Background Gratis', 1, '2024-12-30 10:24:55', '2024-12-30 10:24:55'),
-(5, 'Beige', 'background/pYIG5oamRSV2wTNtpsbDopHw5Kyr2vex4ubQVo2q.png', 'Background Gratis', 1, '2024-12-30 10:25:28', '2024-12-30 10:25:28');
 
 -- --------------------------------------------------------
 
@@ -98,19 +80,6 @@ CREATE TABLE `galleries` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `galleries`
---
-
-INSERT INTO `galleries` (`id`, `package_id`, `image_path`, `created_at`, `updated_at`) VALUES
-(1, 1, 'gallery/WbFoL8k6dXLcXNvZguxAuJZTSiSZekZwL62K6450.jpg', '2024-12-29 04:30:20', '2024-12-29 04:30:20'),
-(2, 4, 'gallery/xT7A83WiDBFLqK483TXKAqZMVbQsxh7AQKqy1ony.jpg', '2024-12-29 04:30:37', '2024-12-29 04:30:37'),
-(3, 7, 'gallery/W2bCgAXqZOy8bEFIPKtMjhHYx7Pmw1WkIjAnytV5.jpg', '2024-12-29 04:30:49', '2024-12-29 04:30:49'),
-(4, 1, 'gallery/VfNNHFTqfxFj1q5Ezza8CassW38sK1ixALHsgxNY.jpg', '2024-12-29 04:31:02', '2024-12-29 04:31:02'),
-(5, 8, 'gallery/gYXNeziBi1d37z6HdnvHveMhmbusYEuW4jTnLGDb.jpg', '2024-12-29 04:31:20', '2024-12-29 04:31:20'),
-(6, 7, 'gallery/7CEUsSK6TxLDPpI26CjehBFoPbxZkn0gDjqVApyW.jpg', '2024-12-29 04:31:38', '2024-12-29 04:32:34'),
-(7, 2, 'gallery/ReiGq4I2HyU7TD7w9WXIWL29nnJyNGBFCSvOxLlN.jpg', '2024-12-29 04:31:39', '2024-12-29 04:31:39');
 
 -- --------------------------------------------------------
 
@@ -165,7 +134,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (34, '2024_12_29_145154_add_location_to_other_packages_table', 30),
 (35, '2024_12_30_214208_add_payment_proof_to_other_packages_table', 31),
 (36, '2024_12_30_215003_create_reservations_table', 32),
-(37, '2024_12_31_001938_create_ratings_table', 33);
+(37, '2024_12_31_001938_create_ratings_table', 33),
+(42, '2025_01_04_073315_add_midtrans_columns_to_wedding_packages_table', 34),
+(43, '2025_01_04_100934_add_order_id_to_other_packages_table', 34),
+(44, '2025_01_04_101819_add_order_id_to_selfphoto_photobox_packages_table', 35),
+(46, '2025_01_04_103024_add_order_id_to_wedding_packages_table', 36);
 
 -- --------------------------------------------------------
 
@@ -185,6 +158,7 @@ CREATE TABLE `other_packages` (
   `admin_fee` decimal(10,2) NOT NULL,
   `total_price` decimal(10,2) NOT NULL,
   `payment_proof` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `order_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` enum('Pending','Payment','Confirmed','Cancelled','Reserved') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Pending',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -204,20 +178,6 @@ CREATE TABLE `packages` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `packages`
---
-
-INSERT INTO `packages` (`id`, `name`, `price`, `desc`, `created_at`, `updated_at`) VALUES
-(1, 'Selfphoto/Photobox', 60000.00, 'Test', '2024-11-26 06:06:25', '2024-11-26 06:06:25'),
-(2, 'Wedding', 1800000.00, 'Test', '2024-11-26 06:06:58', '2024-11-26 06:06:58'),
-(3, 'Wisuda', 100000.00, 'Test', '2024-11-26 06:07:24', '2024-11-26 06:07:24'),
-(4, 'Ulang Tahun', 100000.00, 'Test', '2024-11-26 06:07:24', '2024-11-26 06:07:24'),
-(5, 'Prewedding', 100000.00, 'Test', '2024-11-26 06:07:24', '2024-11-26 06:07:24'),
-(6, 'Tunangan', 100000.00, 'Test', '2024-11-26 06:07:24', '2024-11-26 06:07:24'),
-(7, 'Akikah', 100000.00, 'Test', '2024-11-26 06:07:24', '2024-11-26 06:07:24'),
-(8, 'Event Lainnya', 100000.00, 'Test', '2024-11-26 06:07:24', '2024-11-26 06:07:24');
 
 -- --------------------------------------------------------
 
@@ -303,6 +263,7 @@ CREATE TABLE `selfphoto_photobox_packages` (
   `admin_fee` decimal(10,2) NOT NULL,
   `total_price` decimal(10,2) NOT NULL,
   `payment_proof` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `order_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` enum('Pending','Payment','Confirmed','Cancelled','Reserved') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Pending',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -350,6 +311,7 @@ CREATE TABLE `wedding_packages` (
   `admin_fee` int(11) NOT NULL DEFAULT 3000,
   `total_price` int(11) NOT NULL,
   `payment_proof` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `order_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` enum('Pending','Payment','Confirmed','Cancelled','Reserved') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Pending',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -397,6 +359,7 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `other_packages`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `other_packages_order_id_unique` (`order_id`),
   ADD KEY `other_packages_user_id_foreign` (`user_id`);
 
 --
@@ -438,6 +401,7 @@ ALTER TABLE `reservations`
 --
 ALTER TABLE `selfphoto_photobox_packages`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `selfphoto_photobox_packages_order_id_unique` (`order_id`),
   ADD KEY `selfphoto_photobox_packages_user_id_foreign` (`user_id`);
 
 --
@@ -452,6 +416,7 @@ ALTER TABLE `users`
 --
 ALTER TABLE `wedding_packages`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `wedding_packages_order_id_unique` (`order_id`),
   ADD KEY `wedding_packages_user_id_foreign` (`user_id`);
 
 --
@@ -462,13 +427,13 @@ ALTER TABLE `wedding_packages`
 -- AUTO_INCREMENT for table `about_us`
 --
 ALTER TABLE `about_us`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `backgrounds`
 --
 ALTER TABLE `backgrounds`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -480,13 +445,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `galleries`
 --
 ALTER TABLE `galleries`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `other_packages`
@@ -498,7 +463,7 @@ ALTER TABLE `other_packages`
 -- AUTO_INCREMENT for table `packages`
 --
 ALTER TABLE `packages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`

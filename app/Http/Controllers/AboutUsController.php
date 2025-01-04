@@ -13,6 +13,9 @@ class AboutUsController extends Controller
         $aboutUsData = AboutUs::first();
         $teamMembers = User::where('level', 0)->get();
 
-        return view('about-us', compact('aboutUsData', 'teamMembers'));
+        return view('about-us', [
+            'aboutUsData' => $aboutUsData ?? null,
+            'teamMembers' => $teamMembers,
+        ]);
     }
 }
