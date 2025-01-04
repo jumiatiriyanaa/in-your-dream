@@ -34,14 +34,14 @@
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="col-12">
-                                        <label for="description" class="col-sm-2 col-form-label">Description</label>
+                                        <label for="description" class="col-sm-2 col-form-label">Deskripsi</label>
                                         <div class="col-sm-10">
                                             <textarea name="description" id="description" class="form-control" rows="5" required></textarea>
                                         </div>
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="image" class="col-sm-2 col-form-label">Image</label>
+                                        <label for="image" class="col-sm-2 col-form-label">Gambar</label>
                                         <div class="col-sm-10">
                                             <input type="file" name="image" id="image" class="form-control"
                                                 required>

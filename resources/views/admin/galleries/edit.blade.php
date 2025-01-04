@@ -3,6 +3,22 @@
 @section('title', 'Edit Data Gallery')
 
 @section('content')
+    <div class="pagetitle">
+        <h1>Manajemen Gallery</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{{ route('admin.dashboard') }}">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ route('admin.galleries.index') }}">Manajemen Gallery</a>
+                </li>
+                <li class="breadcrumb-item active">Edit Gallery</li>
+            </ol>
+        </nav>
+    </div>
+    <!-- End Page Title -->
+
     <section class="section dashboard">
         <div class="row">
             <div class="col-lg-12">
@@ -37,8 +53,8 @@
                                         <label for="image" class="col-sm-2 col-form-label">Gambar</label>
                                         <div class="col-sm-10">
                                             <input type="file" name="image" id="image" class="form-control">
-                                            <img src="{{ asset('storage/' . $gallery->image_path) }}" width="100"
-                                                class="mt-3">
+                                            <img src="{{ asset('storage/' . $gallery->image_path) }}" class="img-fluid mt-3"
+                                                width="200">
                                         </div>
                                     </div>
 

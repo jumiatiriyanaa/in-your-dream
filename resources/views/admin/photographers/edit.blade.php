@@ -3,6 +3,22 @@
 @section('title', 'Edit Data Photographer')
 
 @section('content')
+    <div class="pagetitle">
+        <h1>Manajemen Photographer</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{{ route('admin.dashboard') }}">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ route('admin.photographers.index') }}">Manajemen Photographer</a>
+                </li>
+                <li class="breadcrumb-item active">Edit Photographer</li>
+            </ol>
+        </nav>
+    </div>
+    <!-- End Page Title -->
+
     <section class="section dashboard">
         <div class="row">
             <div class="col-lg-12">
