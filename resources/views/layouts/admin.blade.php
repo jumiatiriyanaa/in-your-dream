@@ -8,8 +8,8 @@
     <meta content="" name="description" />
     <meta content="" name="keywords" />
     <!-- Favicons -->
-    <link href="{{ asset('admin/img/favicon.png') }}" rel="icon" />
-    <link href="{{ asset('admin/img/apple-touch-icon.png') }}" rel="apple-touch-icon" />
+    <link href="{{ asset('img/favicon.png') }}" rel="icon" />
+    <link href="{{ asset('img/apple-touch-icon.png') }}" rel="apple-touch-icon" />
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect" />
     <link
@@ -32,7 +32,7 @@
     <header id="header" class="header fixed-top d-flex align-items-center">
         <div class="d-flex align-items-center justify-content-between">
             <a href="{{ route('admin.dashboard') }}" class="logo d-flex align-items-center">
-                <img src="{{ asset('admin/img/logo.png') }}" alt="Logo POLBENG" class="me-3" />
+                <img src="{{ asset('img/logo.png') }}" alt="Logo POLBENG" class="me-3" />
                 <span class="d-none d-lg-block">In Your Dream</span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -86,7 +86,7 @@
                 <li class="nav-item dropdown pe-3">
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#"
                         data-bs-toggle="dropdown">
-                        <img src="{{ asset('admin/img/logo.png') }}" alt="Profile" class="rounded-circle" />
+                        <img src="{{ asset('img/logo.png') }}" alt="Profile" class="rounded-circle" />
                         <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
                     </a>
                     <!-- End Profile Image Icon -->

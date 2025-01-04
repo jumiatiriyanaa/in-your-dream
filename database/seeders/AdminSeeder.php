@@ -18,7 +18,7 @@ class AdminSeeder extends Seeder
             'name' => 'Bimo Nugraha',
             'email' => 'bimonugraha@gmail.com',
             'email_verified_at' => null,
-            'phone_number' => 086712345678,
+            'phone_number' => '086712345678',
             'address' => 'Jl. HOS Cokroaminoto',
             'password' => Hash::make('bimbimoo'),
             'remember_token' => null,
