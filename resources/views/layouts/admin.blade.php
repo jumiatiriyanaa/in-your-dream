@@ -111,15 +111,14 @@
                         </li>
 
                         <li>
-                            <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                            <a class="dropdown-item d-flex align-items-center" href="#"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="bi bi-box-arrow-right"></i>
+                                <span>Sign Out</span>
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                style="display: none;">
                                 @csrf
-                                <button type="submit"
-                                    style="background: none; border: none; padding: 0; cursor: pointer;">
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <i class="bi bi-box-arrow-right"></i>
-                                        <span>Sign Out</span>
-                                    </a>
-                                </button>
                             </form>
                         </li>
                     </ul>
