@@ -107,10 +107,26 @@
                     <div class="col-lg-4 col-md-3 footer-links">
                         <h4>Useful Links</h4>
                         <ul>
-                            <li><a href="/home">Home</a></li>
-                            <li><a href="/about-us">About us</a></li>
-                            <li><a href="/gallery">Gallery</a></li>
-                            <li><a href="/pricelist">Pricelist</a></li>
+                            <li>
+                                <a href="{{ Auth::check() ? '/home' : '/' }}">
+                                    {{ Auth::check() ? 'Home' : 'Welcome' }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/about-us" class="{{ Request::is('about-us') ? 'active' : '' }}">
+                                    About us
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/gallery" class="{{ Request::is('gallery') ? 'active' : '' }}">
+                                    Gallery
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/pricelist" class="{{ Request::is('pricelist') ? 'active' : '' }}">
+                                    Pricelist
+                                </a>
+                            </li>
                         </ul>
                     </div>
 
