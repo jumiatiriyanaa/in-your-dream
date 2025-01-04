@@ -36,12 +36,30 @@
 
             <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li><a href="/home" class="{{ Request::is('home') ? 'active' : '' }}">Home</a></li>
+                    <li>
+                        <a href="{{ Auth::check() ? '/home' : '/' }}"
+                            class="{{ Request::is(Auth::check() ? 'home' : '') ? 'active' : '' }}">
+                            Home
+                        </a>
+                    </li>
                     <li><a href="/gallery" class="{{ Request::is('gallery') ? 'active' : '' }}">Gallery</a></li>
                     <li><a href="/pricelist" class="{{ Request::is('pricelist') ? 'active' : '' }}">Pricelist</a></li>
                     <li><a href="/about-us" class="{{ Request::is('/about-us') ? 'active' : '' }}">About Us</a></li>
                     @auth
                         <li class="nav-item dropdown">
+                            {{-- @php
+                                $avatar =
+                                    Auth::user()->login_type == 'google' && Auth::user()->avatar
+                                        ? Auth::user()->avatar
+                                        : (Auth::user()->avatar
+                                            ? asset('storage/' . Auth::user()->avatar)
+                                            : 'https://via.placeholder.com/300');
+                            @endphp
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{{ $avatar }}" alt="Avatar" class="img-fluid rounded-circle"
+                                    style="width: 30px; height: 30px; object-fit: cover;">
+                            </a> --}}
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 {{ Auth::user()->name }}
