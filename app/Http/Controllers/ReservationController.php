@@ -20,7 +20,8 @@ class ReservationController extends Controller
 
         $reservations = $selfPhotoPackages->merge($weddingPackages)->merge($otherPackages);
 
-        $currentReservation = $reservations->firstWhere('status', 'Confirmed');
+        $currentReservation = $reservations->where('status', 'Confirmed');
+
         $reservationHistory = $reservations->whereIn('status', ['Reserved', 'Completed', 'Cancelled']);
 
         return view('reservation', compact('currentReservation', 'reservationHistory'));

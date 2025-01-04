@@ -41,55 +41,64 @@
                 @endif
 
                 <h2 class="section-title mt-4">Current Reservation</h2>
-
-                @if ($currentReservation)
-                    <!-- Current Reservation -->
+                @forelse ($currentReservation as $current)
                     <div class="reservation-card card mb-5">
                         <div class="card-header d-flex justify-content-between p-3">
+                            @php
+                                $packageType = match ($current->package_type) {
+                                    'wedding_package' => 'Wedding Package',
+                                    'self_photo_package' => 'SelfPhoto/Photobox Package',
+                                    default => $current->package_type,
+                                };
+                            @endphp
                             <span class="package-title">
-                                {{ $currentReservation->package_type }} •
-                                {{ \Carbon\Carbon::parse($currentReservation->reservation_date)->format('l, j F Y - H:i') }}
+                                {{ $packageType }} •
+                                {{ \Carbon\Carbon::parse($current->reservation_date)->format('l, j F Y - H:i') }}
                             </span>
                             <span class="status-label pending">
-                                {{ $currentReservation->status }}
+                                {{ $current->status }}
                             </span>
                         </div>
                         <div class="card-body">
                             <div class="reservation-details d-flex justify-content-between">
                                 <div class="details">
-                                    <p class="package-name">
-                                        {{ $currentReservation->package->name ?? $currentReservation->package_type }}
-                                    </p>
+                                    <p class="package-name">{{ $current->package->name ?? $packageType }}</p>
                                 </div>
                                 <div class="pricing text-right">
-                                    <p>Rp {{ number_format($currentReservation->total_price, 0, ',', '.') }}</p>
+                                    <p>Rp {{ number_format($current->total_price, 0, ',', '.') }}</p>
                                 </div>
                             </div>
                             <div class="reservation-fees mt-3">
                                 <p>Biaya Admin:
-                                    <span>{{ number_format($currentReservation->admin_fee, 0, ',', '.') }}</span>
+                                    <span>{{ number_format($current->admin_fee, 0, ',', '.') }}</span>
                                 </p>
                             </div>
                         </div>
                         <div class="card-footer text-right">
-                            <form action="{{ route('reservations.cancel', $currentReservation->id) }}" method="POST"
+                            <form action="{{ route('reservations.cancel', $current->id) }}" method="POST"
                                 onsubmit="return confirm('Are you sure you want to cancel this reservation?');">
                                 @csrf
                                 <button type="submit" class="btn btn-danger">Cancel</button>
                             </form>
                         </div>
                     </div>
-                @else
+                @empty
                     <p class="text-center mb-5">Anda tidak memiliki reservasi yang aktif.</p>
-                @endif
+                @endforelse
 
-                <!-- Reservation History -->
                 <h2 class="section-title">Reservation History</h2>
-                @forelse($reservationHistory as $history)
+                @forelse ($reservationHistory as $history)
                     <div class="reservation-card card mb-5">
                         <div class="card-header d-flex justify-content-between p-3">
+                            @php
+                                $packageType = match ($history->package_type) {
+                                    'wedding_package' => 'Wedding Package',
+                                    'self_photo_package' => 'SelfPhoto/Photobox Package',
+                                    default => $history->package_type,
+                                };
+                            @endphp
                             <span class="package-title">
-                                {{ $history->package_type }} •
+                                {{ $packageType }} •
                                 {{ \Carbon\Carbon::parse($history->reservation_date)->format('l, j F Y - H:i') }}
                             </span>
                             <span class="status-label {{ $history->status == 'Completed' ? 'completed' : 'cancelled' }}">
@@ -99,7 +108,7 @@
                         <div class="card-body">
                             <div class="reservation-details d-flex justify-content-between">
                                 <div class="details">
-                                    <p class="package-name">{{ $history->package->name ?? $history->package_type }}</p>
+                                    <p class="package-name">{{ $history->package->name ?? $packageType }}</p>
                                 </div>
                                 <div class="pricing text-right">
                                     <p>{{ $history->payment_method }} - Rp
