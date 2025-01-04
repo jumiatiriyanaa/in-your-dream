@@ -24,7 +24,11 @@ class OtherPackageController extends Controller
     {
         $user = Auth::user();
         $packages = Package::whereNotIn('name', ['Selfphoto/Photobox', 'Wedding'])->get();
-        return view('other-package.create', compact('user', 'packages'));
+        $reservedDates = OtherPackage::pluck('reservation_date')->map(function ($date) {
+            return \Carbon\Carbon::parse($date)->format('Y-m-d');
+        })->toArray();
+
+        return view('other-package.create', compact('user', 'packages', 'reservedDates'));
     }
 
     public function store(Request $request)

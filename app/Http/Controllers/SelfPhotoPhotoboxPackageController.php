@@ -43,6 +43,15 @@ class SelfPhotoPhotoboxPackageController extends Controller
             'payment_method' => 'required|string',
         ]);
 
+        $existingReservation = SelfPhotoPhotoboxPackage::where('schedule_date', $validated['schedule_date'])
+            ->where('schedule_time', $validated['schedule_time'])
+            ->first();
+
+        if ($existingReservation) {
+            return redirect()->route('selfphoto-photobox-package.create')
+                ->with('error', 'Tanggal dan waktu yang Anda pilih sudah terpesan.');
+        }
+
         $base_price = 60000;
         $additional_cost_per_person = 15000;
 

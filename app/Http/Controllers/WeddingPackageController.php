@@ -22,7 +22,14 @@ class WeddingPackageController extends Controller
     public function create()
     {
         $user = Auth::user();
-        return view('wedding-package.create', compact('user'));
+        $reservedRanges = WeddingPackage::select('start_date', 'end_date')->get()->map(function ($reservation) {
+            return [
+                'from' => \Carbon\Carbon::parse($reservation->start_date)->format('Y-m-d'),
+                'to' => \Carbon\Carbon::parse($reservation->end_date)->format('Y-m-d')
+            ];
+        });
+
+        return view('wedding-package.create', compact('user', 'reservedRanges'));
     }
 
     public function store(Request $request)

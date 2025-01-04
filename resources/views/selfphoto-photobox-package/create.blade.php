@@ -10,6 +10,10 @@
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
 
+        @if (session('error'))
+            <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
+
         @if (Auth::check() && empty(Auth::user()->phone_number))
             <div class="alert alert-warning">
                 <strong>Perhatian!</strong> Silahkan lengkapi data profile Anda, terutama nomor telepon.
@@ -88,4 +92,29 @@
             </div>
         </form>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const scheduleDate = document.getElementById('schedule_date');
+            const scheduleTime = document.getElementById('schedule_time');
+
+            scheduleDate.addEventListener('change', checkReservation);
+            scheduleTime.addEventListener('change', checkReservation);
+
+            function checkReservation() {
+                const selectedDate = scheduleDate.value;
+                const selectedTime = scheduleTime.value;
+
+                if (selectedDate && selectedTime) {
+                    fetch(`/check-reservation?date=${selectedDate}&time=${selectedTime}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.exists) {
+                                alert("Tanggal dan waktu yang Anda pilih sudah terpesan.");
+                            }
+                        });
+                }
+            }
+        });
+    </script>
 @endsection

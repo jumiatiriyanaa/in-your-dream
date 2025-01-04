@@ -53,7 +53,7 @@
 
             <div class="col-md-12">
                 <label for="reservation_date" class="form-label">Tanggal Reservasi</label>
-                <input type="date" class="form-control" id="reservation_date" name="reservation_date" required>
+                <input type="text" class="form-control" id="reservation_date" name="reservation_date" required>
             </div>
 
             <div class="col-md-12">
@@ -81,4 +81,16 @@
             </div>
         </form>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const reservedDates = @json($reservedDates);
+
+            flatpickr("#reservation_date", {
+                dateFormat: "Y-m-d",
+                minDate: "today",
+                disable: reservedDates
+            });
+        });
+    </script>
 @endsection

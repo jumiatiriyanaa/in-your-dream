@@ -37,17 +37,18 @@
 
             <div class="col-md-6">
                 <label for="start_date" class="form-label">Tanggal Mulai</label>
-                <input type="date" id="start_date" name="start_date" class="form-control" required>
+                <input type="text" id="start_date" name="start_date" class="form-control" required>
             </div>
 
             <div class="col-md-6">
                 <label for="end_date" class="form-label">Tanggal Selesai</label>
-                <input type="date" id="end_date" name="end_date" class="form-control" required>
+                <input type="text" id="end_date" name="end_date" class="form-control" disabled required>
             </div>
 
             <div class="col-md-12">
                 <label for="event_location" class="form-label">Lokasi Acara</label>
                 <input type="text" id="event_location" name="event_location" class="form-control" required>
+
                 {{-- <div class="form-check mt-2">
                     <input class="form-check-input" type="checkbox" id="same_as_address" value="1"
                         data-address="{{ $user->address }}">
@@ -101,4 +102,37 @@
             </div>
         </form>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const reservedRanges = @json($reservedRanges);
+
+            const disableDates = reservedRanges.map(range => ({
+                from: range.from,
+                to: range.to
+            }));
+
+            const startDatePicker = flatpickr("#start_date", {
+                dateFormat: "Y-m-d",
+                minDate: "today",
+                disable: disableDates,
+                onChange: function(selectedDates, dateStr) {
+                    const endDateInput = document.querySelector("#end_date");
+
+                    if (dateStr) {
+                        endDateInput.disabled = false;
+                        endDatePicker.set('minDate', dateStr);
+                    } else {
+                        endDateInput.disabled = true;
+                        endDatePicker.set('minDate', null);
+                    }
+                }
+            });
+
+            const endDatePicker = flatpickr("#end_date", {
+                dateFormat: "Y-m-d",
+                disable: disableDates,
+            });
+        });
+    </script>
 @endsection

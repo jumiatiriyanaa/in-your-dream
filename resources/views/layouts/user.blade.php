@@ -21,6 +21,8 @@
     <link href="{{ asset('guest/vendor/aos/aos.css') }}" rel="stylesheet" />
     <link href="{{ asset('guest/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('guest/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet" />
+    <!-- Flatpickr CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
     <!-- Main CSS File -->
     <link href="{{ asset('guest/css/main.css') }}" rel="stylesheet" />
     <!-- My CSS -->
@@ -154,6 +156,8 @@
     <script src="{{ asset('guest/vendor/glightbox/js/glightbox.min.js') }}"></script>
     <!-- Main JS File -->
     <script src="{{ asset('guest/js/main.js') }}"></script>
+    <!-- Flatpickr -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <!-- My JS -->
     <script src="{{ asset('js/script.js') }}"></script>
 </body>
