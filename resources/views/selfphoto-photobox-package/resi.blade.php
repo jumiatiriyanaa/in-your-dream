@@ -13,7 +13,16 @@
         @endif
 
         <div class="d-flex align-items-center mb-4">
-            <img src="https://via.placeholder.com/50" alt="Avatar" class="avatar me-3">
+            @php
+                $avatar =
+                    $reservation->user->login_type == 'google' && $reservation->user->avatar
+                        ? $reservation->user->avatar
+                        : ($reservation->user->avatar
+                            ? asset('storage/' . $reservation->user->avatar)
+                            : 'https://via.placeholder.com/50');
+            @endphp
+            <img src="{{ $avatar }}" alt="Avatar" class="avatar me-3"
+                style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;">
             <div>
                 <h5 class="mb-0">{{ $reservation->user->name }}</h5>
                 <p class="mb-0">{{ $reservation->user->email }}</p>
