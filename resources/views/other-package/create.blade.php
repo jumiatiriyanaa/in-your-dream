@@ -76,7 +76,7 @@
             </div>
 
             <div class="col-md-12">
-                <button type="submit" class="btn btn-dark w-100">Lanjutkan</button>
+                <button type="submit" class="btn-booking">Lanjutkan</button>
             </div>
         </form>
     </div>

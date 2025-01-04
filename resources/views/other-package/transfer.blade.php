@@ -43,7 +43,7 @@
                 <input type="file" class="form-control" id="payment_proof" name="payment_proof" required>
             </div>
             <input type="hidden" name="reservation_id" value="{{ $reservation->id }}">
-            <button type="submit" class="btn btn-dark w-100">Kirim Bukti Pembayaran</button>
+            <button type="submit" class="btn-booking">Kirim Bukti Pembayaran</button>
         </form>
     </div>
 @endsection
