@@ -144,7 +144,7 @@ class OtherPackageController extends Controller
         $this->storeReservation($reservation, 'Other Package');
 
         return redirect()->route('other-package.create')
-            ->with('success', 'Pesanan telah dikonfirmasi!');
+            ->with('success', 'Pesanan sedang diproses!');
     }
 
     protected function storeReservation($reservation, $packageType)

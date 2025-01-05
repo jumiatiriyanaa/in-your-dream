@@ -157,7 +157,7 @@ class SelfPhotoPhotoboxPackageController extends Controller
         $this->storeReservation($reservation, 'Self Photo / Photobox');
 
         return redirect()->route('selfphoto-photobox-package.create')
-            ->with('success', 'Pesanan telah dikonfirmasi!');
+            ->with('success', 'Pesanan sedang diproses!');
     }
 
     protected function storeReservation($reservation, $packageType)

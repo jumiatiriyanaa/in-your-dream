@@ -153,7 +153,7 @@ class WeddingPackageController extends Controller
         $this->storeReservation($reservation, 'Wedding Package');
 
         return redirect()->route('wedding-package.create')
-            ->with('success', 'Pesanan telah dikonfirmasi!');
+            ->with('success', 'Pesanan sedang diproses!');
     }
 
     protected function storeReservation($reservation, $packageType)
