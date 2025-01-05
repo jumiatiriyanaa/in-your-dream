@@ -362,3 +362,16 @@ body {
 .btn-dark:hover {
     background-color: #555;
 }
+
+.stars i {
+    color: gold;
+    margin: 0 2px;
+}
+
+.review-item img {
+    border: 2px solid #ddd;
+}
+
+.review-item h6 {
+    margin: 0;
+}

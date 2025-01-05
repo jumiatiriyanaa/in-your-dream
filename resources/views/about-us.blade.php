@@ -9,11 +9,7 @@
             style="background-image: url('{{ asset('img/studio-background.png') }}');">
             <div class="container position-relative">
                 <h1>About Us</h1>
-                <p>
-                    Home
-                    /
-                    About Us
-                </p>
+                <p>We Make Memories Last Forever</p>
                 <nav class="breadcrumbs">
                     <ol>
                         <li><a href="/">Home</a></li>
@@ -68,7 +64,7 @@
             <div class="container text-center">
                 <h2 class="text-white">Trusted by Over 1200+ Happy Customers</h2>
                 <p>Rating for Exceptional Photography Services</p>
-                <a href="/pricelist" class="btn btn-dark">Contact Us</a>
+                <a onclick="window.location.href='https://wa.me/+6281371867783'" class="btn btn-dark">Contact Us</a>
             </div>
         </section>
     </main>

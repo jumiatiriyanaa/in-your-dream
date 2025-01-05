@@ -1,16 +1,16 @@
 @extends('layouts.admin')
 
-@section('title', 'Manajemen Reservasi')
+@section('title', 'Manajemen Reservation')
 
 @section('content')
     <div class="pagetitle">
-        <h1>Manajemen Reservasi</h1>
+        <h1>Manajemen Reservation</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
                     <a href="{{ route('admin.dashboard') }}">Home</a>
                 </li>
-                <li class="breadcrumb-item active">Manajemen Reservasi</li>
+                <li class="breadcrumb-item active">Manajemen Reservation</li>
             </ol>
         </nav>
     </div>
@@ -24,7 +24,7 @@
                         <div class="card recent-sales overflow-auto">
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    Manajemen Reservasi
+                                    Manajemen Reservation
                                 </h5>
 
                                 <table class="table table-borderless datatable">

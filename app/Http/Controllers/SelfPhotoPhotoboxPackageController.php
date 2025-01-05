@@ -20,6 +20,20 @@ class SelfPhotoPhotoboxPackageController extends Controller
         Config::$is3ds = true;
     }
 
+    public function checkReservation(Request $request)
+    {
+        $date = $request->query('date');
+
+        $reservedTimes = SelfPhotoPhotoboxPackage::where('schedule_date', $date)
+            ->pluck('schedule_time')
+            ->map(function ($time) {
+                return substr($time, 0, 5);
+            })
+            ->toArray();
+
+        return response()->json(['disabledTimes' => $reservedTimes]);
+    }
+
     public function create()
     {
         $user = Auth::user();
@@ -39,17 +53,16 @@ class SelfPhotoPhotoboxPackageController extends Controller
             'schedule_date' => 'required|date',
             'schedule_time' => 'required|string',
             'background_choice' => 'required|string',
-            'number_of_friends' => 'required|integer|min:0',
+            'number_of_friends' => 'required|integer|min:1',
             'payment_method' => 'required|string',
         ]);
 
         $existingReservation = SelfPhotoPhotoboxPackage::where('schedule_date', $validated['schedule_date'])
             ->where('schedule_time', $validated['schedule_time'])
-            ->first();
+            ->exists();
 
         if ($existingReservation) {
-            return redirect()->route('selfphoto-photobox-package.create')
-                ->with('error', 'Tanggal dan waktu yang Anda pilih sudah terpesan.');
+            return redirect()->back()->with('error', 'Waktu yang Anda pilih sudah dipesan.');
         }
 
         $base_price = 60000;

@@ -92,7 +92,7 @@
                 <select id="payment_method" name="payment_method" class="form-select">
                     <option value="" disabled selected>Pilih Metode Pembayaran</option>
                     <option value="Cash">Cash</option>
-                    <option value="Transfer">Transfer</option>
+                    {{-- <option value="Transfer">Transfer</option> --}}
                     <option value="Dompet Digital">Dompet Digital</option>
                 </select>
             </div>

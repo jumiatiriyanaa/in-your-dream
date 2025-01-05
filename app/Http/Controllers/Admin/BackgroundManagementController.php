@@ -25,7 +25,7 @@ class BackgroundManagementController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'description' => 'nullable|string',
+            'type' => 'required|string|in:Photobox,Self Photo',
             'is_free' => 'required|boolean',
         ]);
 
@@ -34,7 +34,8 @@ class BackgroundManagementController extends Controller
         Background::create([
             'name' => $request->name,
             'image_path' => $imagePath,
-            'description' => $request->description,
+            'description' => 'Background Gratis',
+            'type' => $request->type,
             'is_free' => $request->is_free,
         ]);
 
@@ -54,7 +55,7 @@ class BackgroundManagementController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'description' => 'nullable|string',
+            'type' => 'required|string|in:Photobox,Self Photo',
             'is_free' => 'required|boolean',
         ]);
 
@@ -69,8 +70,9 @@ class BackgroundManagementController extends Controller
 
         $background->update([
             'name' => $request->name,
-            'description' => $request->description,
+            'type' => $request->type,
             'is_free' => $request->is_free,
+            'description' => 'Background Gratis',
         ]);
 
         return redirect()->route('admin.backgrounds.index')->with('success', 'Background updated successfully!');

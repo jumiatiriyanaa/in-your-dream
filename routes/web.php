@@ -7,6 +7,7 @@ use App\Http\Controllers\RatingController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PricelistController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\OtherPackageController;
@@ -33,7 +34,8 @@ use App\Http\Controllers\Admin\PhotographerManagementController;
 
 Route::get('/', [LandingPageController::class, 'index'])->name('home');
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
-Route::view('/pricelist', 'pricelist');
+Route::get('/pricelist', [PricelistController::class, 'index'])->name('pricelist');
+Route::get('/package-ratings/{packageId}', [PricelistController::class, 'getPackageRatings']);
 Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us');
 
 Route::prefix('auth')->group(function () {
@@ -63,6 +65,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('selfphoto-photobox-package', [SelfPhotoPhotoboxPackageController::class, 'create'])->name('selfphoto-photobox-package.create');
     Route::post('selfphoto-photobox-package/store', [SelfPhotoPhotoboxPackageController::class, 'store'])->name('selfphoto-photobox-package.store');
+    Route::get('/check-reservation', [SelfPhotoPhotoboxPackageController::class, 'checkReservation']);
     Route::get('selfphoto-photobox-package/transfer/{id}', [SelfPhotoPhotoboxPackageController::class, 'transfer'])->name('selfphoto-photobox-package.transfer');
     Route::post('selfphoto-photobox-package/upload-proof', [SelfPhotoPhotoboxPackageController::class, 'uploadProof'])->name('selfphoto-photobox-package.upload-proof');
     Route::get('selfphoto-photobox-package/resi/{id}', [SelfPhotoPhotoboxPackageController::class, 'showResi'])->name('selfphoto-photobox-package.resi');

@@ -9,11 +9,7 @@
             style="background-image: url('{{ asset('img/studio-background.png') }}');">
             <div class="container position-relative">
                 <h1>Gallery</h1>
-                <p>
-                    Home
-                    /
-                    Gallery
-                </p>
+                <p>Express Yourself in Every Portrait</p>
                 <nav class="breadcrumbs">
                     <ol>
                         <li><a href="/">Home</a></li>

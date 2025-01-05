@@ -15,6 +15,7 @@ class Background extends Model
         'name',
         'image_path',
         'description',
+        'type',
         'is_free',
     ];
 }

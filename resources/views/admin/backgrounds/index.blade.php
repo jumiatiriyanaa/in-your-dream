@@ -48,6 +48,7 @@
                                         <tr>
                                             <th>No.</th>
                                             <th>Nama</th>
+                                            <th>Jenis</th>
                                             <th>Gambar</th>
                                             <th>Actions</th>
                                         </tr>
@@ -57,6 +58,7 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}.</td>
                                                 <td>{{ $background->name }}</td>
+                                                <td>{{ $background->type }}</td>
                                                 <td><img src="{{ asset('storage/' . $background->image_path) }}"
                                                         width="100"></td>
                                                 <td>

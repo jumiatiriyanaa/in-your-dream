@@ -143,12 +143,12 @@
                 </a>
             </li>
 
-            <!-- Reservasi -->
+            <!-- Reservation -->
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('admin.reservations.index') ? '' : 'collapsed' }}"
                     href="{{ route('admin.reservations.index') }}">
                     <i class="bi bi-credit-card-2-back"></i>
-                    <span>Reservasi</span>
+                    <span>Reservation</span>
                 </a>
             </li>
 

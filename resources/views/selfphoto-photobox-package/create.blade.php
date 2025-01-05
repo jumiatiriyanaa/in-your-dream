@@ -22,6 +22,15 @@
 
         <form action="{{ route('selfphoto-photobox-package.store') }}" method="POST" class="row g-4">
             @csrf
+            <div class="col-md-12">
+                <label for="package_type" class="form-label">Tipe Paket</label>
+                <select class="form-select" id="package_type" name="package_type" required>
+                    <option value="" disabled selected>Pilih Tipe Paket</option>
+                    <option value="Photobox">Photobox</option>
+                    <option value="Self Photo">Self Photo</option>
+                </select>
+            </div>
+
             <div class="col-md-6">
                 <label for="name" class="form-label">Nama</label>
                 <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}"
@@ -47,14 +56,16 @@
 
                 <div class="col-md-6">
                     <label for="schedule_time" class="form-label">Waktu Reservasi</label>
-                    <input type="time" class="form-control" id="schedule_time" name="schedule_time" required>
+                    <select class="form-select" id="schedule_time" name="schedule_time" required>
+                        <option value="" disabled selected>Pilih Waktu Reservasi</option>
+                    </select>
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row" id="background-list">
                 @if ($backgrounds->isNotEmpty())
                     @foreach ($backgrounds as $background)
-                        <div class="col-md-3">
+                        <div class="col-md-3" data-type="{{ $background->type }}">
                             <input type="radio" class="btn-check" name="background_choice"
                                 id="background{{ $background->id }}" value="{{ $background->name }}" required>
                             <label class="btn btn-outline-secondary w-100 border-0" for="background{{ $background->id }}">
@@ -82,7 +93,6 @@
                 <select class="form-select" id="payment_method" name="payment_method" required>
                     <option value="" disabled selected>Pilih Metode Pembayaran</option>
                     <option value="Cash">Cash</option>
-                    <option value="Transfer">Transfer</option>
                     <option value="Dompet Digital">Dompet Digital</option>
                 </select>
             </div>
@@ -95,32 +105,79 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const scheduleDate = document.getElementById('schedule_date');
-            const today = new Date().toISOString().split('T')[0];
-            scheduleDate.setAttribute('min', today);
+            const packageTypeDropdown = document.getElementById('package_type');
+            const backgroundList = document.getElementById('background-list');
+            const backgrounds = backgroundList.querySelectorAll('[data-type]');
+
+            packageTypeDropdown.addEventListener('change', function() {
+                const selectedType = this.value;
+
+                backgrounds.forEach(background => {
+                    if (background.getAttribute('data-type') === selectedType) {
+                        background.style.display = 'block';
+                    } else {
+                        background.style.display = 'none';
+                    }
+                });
+            });
+
+            const initialType = packageTypeDropdown.value;
+            if (initialType) {
+                backgrounds.forEach(background => {
+                    if (background.getAttribute('data-type') === initialType) {
+                        background.style.display = 'block';
+                    } else {
+                        background.style.display = 'none';
+                    }
+                });
+            }
         });
 
         document.addEventListener('DOMContentLoaded', function() {
             const scheduleDate = document.getElementById('schedule_date');
             const scheduleTime = document.getElementById('schedule_time');
 
-            scheduleDate.addEventListener('change', checkReservation);
-            scheduleTime.addEventListener('change', checkReservation);
+            function generateTimeOptions(disabledTimes = []) {
+                scheduleTime.innerHTML = '<option value="" disabled selected>Pilih Waktu Reservasi</option>';
 
-            function checkReservation() {
-                const selectedDate = scheduleDate.value;
-                const selectedTime = scheduleTime.value;
+                const startHour = 10;
+                const endHour = 22;
+                const intervalMinutes = 15;
 
-                if (selectedDate && selectedTime) {
-                    fetch(`/check-reservation?date=${selectedDate}&time=${selectedTime}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.exists) {
-                                alert("Tanggal dan waktu yang Anda pilih sudah terpesan.");
-                            }
-                        });
+                for (let hour = startHour; hour < endHour; hour++) {
+                    for (let minute = 0; minute < 60; minute += intervalMinutes) {
+                        const timeString =
+                            `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
+                        const option = document.createElement('option');
+                        option.value = timeString;
+                        option.textContent = timeString;
+
+                        if (disabledTimes.includes(timeString)) {
+                            option.disabled = true;
+                        }
+
+                        scheduleTime.appendChild(option);
+                    }
                 }
             }
+
+            function fetchDisabledTimes(date) {
+                if (!date) return;
+
+                fetch(`/check-reservation?date=${date}`)
+                    .then(response => response.json())
+                    .then(data => generateTimeOptions(data.disabledTimes));
+            }
+
+            scheduleDate.addEventListener('change', function() {
+                if (scheduleDate.value) {
+                    fetchDisabledTimes(scheduleDate.value);
+                } else {
+                    generateTimeOptions();
+                }
+            });
+
+            generateTimeOptions();
         });
     </script>
 @endsection

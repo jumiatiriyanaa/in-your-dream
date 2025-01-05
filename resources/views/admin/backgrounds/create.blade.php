@@ -45,10 +45,15 @@
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="description" class="col-form-label">Deskripsi</label>
+                                        <label for="type" class="col-form-label">Jenis Background</label>
                                         <div class="col-sm-10">
-                                            <textarea name="description" id="description" class="form-control" rows="4" placeholder="Deskripsi Background">{{ old('description') }}</textarea>
-                                            @error('description')
+                                            <select name="type" id="type" class="form-select" required>
+                                                <option value="Photobox" {{ old('type') == 'Photobox' ? 'selected' : '' }}>
+                                                    Photobox</option>
+                                                <option value="Self Photo"
+                                                    {{ old('type') == 'Self Photo' ? 'selected' : '' }}>Self Photo</option>
+                                            </select>
+                                            @error('type')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
