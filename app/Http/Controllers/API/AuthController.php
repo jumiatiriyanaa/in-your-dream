@@ -7,57 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
-    public function redirectToGoogle(Request $request)
-    {
-        $redirectUrl = $request->query('platform') === 'mobile'
-            ? config('services.google.redirect_api')
-            : config('services.google.redirect');
-
-        return Socialite::driver('google')
-            ->stateless()
-            ->redirectUrl($redirectUrl)
-            ->redirect();
-    }
-
-    public function handleGoogleCallback()
-    {
-        try {
-            $redirectUrl = $request->query('platform') === 'mobile'
-                ? config('services.google.redirect_api')
-                : config('services.google.redirect');
-
-            $googleUser = Socialite::driver('google')
-                ->stateless()
-                ->redirectUrl($redirectUrl)
-                ->user();
-
-            if (!$user) {
-                $user = User::create([
-                    'name' => $googleUser->getName(),
-                    'email' => $googleUser->getEmail(),
-                    'password' => Hash::make(uniqid()),
-                    'avatar' => $googleUser->getAvatar(),
-                    'login_type' => 'google',
-                    'level' => 1,
-                ]);
-            } else {
-                $user->update([
-                    'avatar' => $googleUser->getAvatar(),
-                    'login_type' => 'google',
-                ]);
-            }
-
-            Auth::login($user);
-            return response()->json(['message' => 'Login successful', 'user_id' => $user->id], 200);
-        } catch (\Exception $e) {
-            return response()->json(['message' => 'Failed to login with Google', 'error' => $e->getMessage()], 500);
-        }
-    }
-
     public function login(Request $request)
     {
         $request->validate([
@@ -73,10 +25,22 @@ class AuthController extends Controller
             $user = Auth::user();
             $user->update(['login_type' => 'manual']);
 
-            return response()->json(['message' => 'Login successful', 'user_id' => $user->id], 200);
+            return response()->json([
+                'message' => 'Login successful',
+                'user' => [
+                    'id' => $user->id,
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'phone_number' => $user->phone_number,
+                    'avatar' => $user->avatar,
+                    'login_type' => $user->login_type,
+                ]
+            ], 200);
         }
 
-        return response()->json(['message' => 'The credentials you provided do not match our records.'], 401);
+        return response()->json([
+            'message' => 'The credentials you provided do not match our records.'
+        ], 401);
     }
 
     public function register(Request $request)
@@ -99,13 +63,16 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return response()->json(['message' => 'Registration successful', 'user_id' => $user->id], 201);
-    }
-
-    public function logout(Request $request)
-    {
-        Auth::logout();
-
-        return response()->json(['message' => 'Logout successful'], 200);
+        return response()->json([
+            'message' => 'Registration successful',
+            'user' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'phone_number' => $user->phone_number,
+                'avatar' => $user->avatar,
+                'login_type' => $user->login_type,
+            ]
+        ], 201);
     }
 }
