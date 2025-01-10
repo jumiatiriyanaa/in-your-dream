@@ -13,7 +13,9 @@ class ReservationManagementController extends Controller
 {
     public function index()
     {
-        $reservations = Reservation::with('user')->get();
+        $reservations = Reservation::with('user')
+            ->orderBy('created_at', 'desc')
+            ->get();
         return view('admin.reservations.index', compact('reservations'));
     }
 

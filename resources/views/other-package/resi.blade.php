@@ -50,7 +50,7 @@
 
         <form action="{{ route('other-package.confirm', $reservation->id) }}" method="POST">
             @csrf
-            <button type="submit" class="btn-booking">Booking</button>
+            <button type="submit" class="btn-booking">Selesai</button>
         </form>
     </div>
 @endsection

@@ -93,12 +93,13 @@
                 <select class="form-select" id="payment_method" name="payment_method" required>
                     <option value="" disabled selected>Pilih Metode Pembayaran</option>
                     <option value="Cash">Cash</option>
+                    {{-- <option value="Transfer">Transfer</option> --}}
                     <option value="Dompet Digital">Dompet Digital</option>
                 </select>
             </div>
 
             <div class="col-md-12">
-                <button type="submit" class="btn-booking">Lanjutkan</button>
+                <button type="submit" class="btn-booking">Booking</button>
             </div>
         </form>
     </div>
