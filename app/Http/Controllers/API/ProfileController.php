@@ -19,6 +19,7 @@ class ProfileController extends Controller
             'email' => $user->email,
             'phone_number' => $user->phone_number,
             'address' => $user->address,
+            'avatar' => $user->avatar,
             'login_type' => $user->login_type,
             'level' => $user->level,
         ], 200);
