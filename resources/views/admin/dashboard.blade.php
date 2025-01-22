@@ -137,19 +137,19 @@
 
                     <!-- About Us Card -->
                     <div class="col-xxl-4 col-md-6">
-                        <a href="{{ route('admin.about-us.index') }}" class="text-decoration-none">
+                        <a href="{{ route('admin.users.index') }}" class="text-decoration-none">
                             <div class="card info-card sales-card">
                                 <div class="card-body">
                                     <h5 class="card-title">
-                                        About Us
+                                        Total Users
                                     </h5>
                                     <div class="d-flex align-items-center">
                                         <div
                                             class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                            <i class="bi bi-info-circle"></i>
+                                            <i class="bi bi-person-circle"></i>
                                         </div>
                                         <div class="ps-3">
-                                            <h6>{{ $totalAboutUs }}</h6>
+                                            <h6>{{ $totalUsersLevel1 }}</h6>
                                         </div>
                                     </div>
                                 </div>

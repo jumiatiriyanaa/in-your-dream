@@ -13,6 +13,7 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\OtherPackageController;
 use App\Http\Controllers\WeddingPackageController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UsersManagementController;
 use App\Http\Controllers\Admin\AboutUsManagementController;
 use App\Http\Controllers\Admin\GalleryManagementController;
 use App\Http\Controllers\Admin\PackageManagementController;
@@ -94,6 +95,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::resource('reservations', ReservationManagementController::class);
     Route::resource('galleries', GalleryManagementController::class);
     Route::resource('photographers', PhotographerManagementController::class);
+    Route::resource('users', UsersManagementController::class);
     Route::resource('backgrounds', BackgroundManagementController::class);
     Route::resource('packages', PackageManagementController::class);
     Route::resource('about-us', AboutUsManagementController::class);

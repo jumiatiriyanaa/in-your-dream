@@ -21,6 +21,7 @@ class DashboardController extends Controller
         $totalGalleries = Gallery::count();
         $totalBackgrounds = Background::count();
         $totalUsersLevel0 = User::where('level', 0)->count();
+        $totalUsersLevel1 = User::where('level', 1)->count();
 
         $totalOtherPackages = OtherPackage::count();
         $totalWeddingPackages = WeddingPackage::count();
@@ -28,6 +29,6 @@ class DashboardController extends Controller
 
         $totalReservation = $totalOtherPackages + $totalWeddingPackages + $totalSelfPhotoPhotoboxPackages;
 
-        return view('admin.dashboard', compact('totalAboutUs', 'totalPackages', 'totalGalleries', 'totalBackgrounds', 'totalUsersLevel0', 'totalReservation'));
+        return view('admin.dashboard', compact('totalAboutUs', 'totalPackages', 'totalGalleries', 'totalBackgrounds', 'totalUsersLevel0', 'totalUsersLevel1', 'totalReservation'));
     }
 }

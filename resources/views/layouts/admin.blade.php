@@ -170,6 +170,15 @@
                 </a>
             </li>
 
+            <!-- Users -->
+            <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('admin.users.index') ? '' : 'collapsed' }}"
+                    href="{{ route('admin.users.index') }}">
+                    <i class="bi bi-person-circle"></i>
+                    <span>Users</span>
+                </a>
+            </li>
+
             <!-- Heading -->
             <li class="nav-heading">Master Data</li>
 
@@ -192,13 +201,13 @@
             </li>
 
             <!-- About Us -->
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('admin.about-us.index') ? '' : 'collapsed' }}"
                     href="{{ route('admin.about-us.index') }}">
                     <i class="bi bi-info-circle"></i>
                     <span>About Us</span>
                 </a>
-            </li>
+            </li> --}}
 
             {{-- <!-- Heading -->
             <li class="nav-heading">Studio</li>
