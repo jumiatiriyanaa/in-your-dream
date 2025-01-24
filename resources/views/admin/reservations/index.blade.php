@@ -83,7 +83,6 @@
                                                         </form>
                                                     @endif
 
-                                                    <!-- Badge Bukti Pembayaran -->
                                                     @if ($reservation->payment_proof)
                                                         <button type="button" class="badge bg-warning text-dark border-0"
                                                             data-bs-toggle="modal"
@@ -91,6 +90,17 @@
                                                             Bukti Pembayaran
                                                         </button>
                                                     @endif
+
+                                                    <form
+                                                        action="{{ route('admin.reservations.destroy', $reservation->id) }}"
+                                                        method="POST" style="display:inline-block;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="badge bg-danger border-0"
+                                                            onclick="return confirm('Apakah Anda yakin ingin menghapus reservasi ini?')">
+                                                            Hapus
+                                                        </button>
+                                                    </form>
                                                 </td>
                                             </tr>
 

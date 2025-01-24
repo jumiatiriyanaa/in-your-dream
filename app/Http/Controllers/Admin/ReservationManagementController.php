@@ -44,4 +44,11 @@ class ReservationManagementController extends Controller
 
         return redirect()->route('admin.reservations.index')->with('success', 'Status reservation updated successfully.');
     }
+
+    public function destroy(Reservation $reservation)
+    {
+        $reservation->delete();
+
+        return redirect()->route('admin.reservations.index')->with('success', 'Reservation deleted successfully.');
+    }
 }

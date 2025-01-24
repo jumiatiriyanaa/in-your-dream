@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 05, 2025 at 01:44 PM
+-- Generation Time: Jan 24, 2025 at 04:37 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -35,6 +35,13 @@ CREATE TABLE `about_us` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `about_us`
+--
+
+INSERT INTO `about_us` (`id`, `description`, `image_path`, `created_at`, `updated_at`) VALUES
+(1, 'In Your Dream adalah studio foto profesional yang berlokasi di kota Bengkalis, tempat di mana momen-momen istimewa Anda diabadikan dengan sepenuh hati. IYD Studio menawarkan layanan fotografi untuk berbagai keperluan, mulai dari pemotretan pernikahan, potret pribadi dan keluarga, hingga acara-acara spesial lainnya.', 'about_us/zcFwpx86Hk8rvQZl1phGEdkTpXOalyFMKwSstaPb.png', '2025-01-04 15:38:29', '2025-01-04 15:38:29');
+
 -- --------------------------------------------------------
 
 --
@@ -51,6 +58,18 @@ CREATE TABLE `backgrounds` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `backgrounds`
+--
+
+INSERT INTO `backgrounds` (`id`, `name`, `image_path`, `description`, `type`, `is_free`, `created_at`, `updated_at`) VALUES
+(1, 'Red', 'background/Y5Nr8tVuQ4yA3uAtwbgWel6cpjx1fsI6QxHJvC3p.png', 'Background Gratis', 'Photobox', 1, '2025-01-04 15:40:47', '2025-01-05 04:40:20'),
+(2, 'Green', 'background/7D26PP6IdSB2UiG6ICuF4LrfWxmXKiAItTRT69sW.png', 'Background Gratis', 'Photobox', 1, '2025-01-04 15:42:14', '2025-01-05 04:40:28'),
+(3, 'Abstract 1', 'background/t4d8oKGy7bzEdnjf6ErdveCl3XnNVHpTdLXpILXo.jpg', 'Background Gratis', 'Photobox', 1, '2025-01-04 15:42:33', '2025-01-04 15:42:33'),
+(4, 'Abstract 2', 'background/xeRpvO7IgRqvAcXi0hWo44LJFAk86ZQYjZBMMnmN.jpg', 'Background Gratis', 'Photobox', 1, '2025-01-04 15:42:51', '2025-01-04 15:42:51'),
+(5, 'Beige', 'background/piulFpj4Uw3dKjsbxMGPhyhTRBpYFlJlI67hbo7s.png', 'Background Gratis', 'Self Photo', 1, '2025-01-05 04:40:11', '2025-01-05 04:40:11'),
+(6, 'White', 'background/ObOxGHLVg1rvSjJdAvAE9WJvTbNP2dDOBLZZE2It.png', 'Background Gratis', 'Self Photo', 1, '2025-01-05 04:40:49', '2025-01-05 04:40:49');
 
 -- --------------------------------------------------------
 
@@ -81,6 +100,19 @@ CREATE TABLE `galleries` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `galleries`
+--
+
+INSERT INTO `galleries` (`id`, `package_id`, `image_path`, `created_at`, `updated_at`) VALUES
+(1, 1, 'gallery/Fc5oH3b1joWebXFpoETd8mU5h31CgKnaGQEaxWPp.jpg', '2025-01-04 15:43:44', '2025-01-04 15:43:44'),
+(2, 7, 'gallery/yFCR87rUTRGoElEKJ2K0Hg4L7RHSUQWbQ0XKcTlC.jpg', '2025-01-04 15:44:00', '2025-01-04 15:44:00'),
+(3, 4, 'gallery/14q1iCwKfoWiT5vObqt7yMY0FWqwTJ9LaTUGCnH0.jpg', '2025-01-04 15:44:16', '2025-01-04 15:44:16'),
+(4, 8, 'gallery/GxJOcNq3yiwmUXDGjqftfGQavrrCVSPAXpFBTlq5.jpg', '2025-01-04 15:44:33', '2025-01-04 15:44:33'),
+(5, 2, 'gallery/zgvRY6nZAtp8qhamifK16sv4o0g1mN6xbBfYYSDP.jpg', '2025-01-04 15:44:59', '2025-01-04 15:44:59'),
+(6, 4, 'gallery/2V2oCUiJToQhwMI50wlfBszXCGH5FyNYfbZZnJWK.jpg', '2025-01-04 15:45:18', '2025-01-04 15:45:18'),
+(7, 1, 'gallery/Ueek9dWKzgAPl1X9laGUR0tSf1Y5u7BuYRRPvF4j.jpg', '2025-01-04 15:45:29', '2025-01-04 15:45:29');
 
 -- --------------------------------------------------------
 
@@ -161,7 +193,7 @@ CREATE TABLE `other_packages` (
   `total_price` decimal(10,2) NOT NULL,
   `payment_proof` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `order_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` enum('Pending','Payment','Confirmed','Cancelled','Reserved') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Pending',
+  `status` enum('Pending','Payment','On Process','Cancelled','Reserved') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Pending',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -280,7 +312,7 @@ CREATE TABLE `selfphoto_photobox_packages` (
   `total_price` decimal(10,2) NOT NULL,
   `payment_proof` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `order_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` enum('Pending','Payment','Confirmed','Cancelled','Reserved') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Pending',
+  `status` enum('Pending','Payment','On Process','Cancelled','Reserved') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Pending',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -307,15 +339,6 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `phone_number`, `address`, `password`, `remember_token`, `avatar`, `login_type`, `level`, `created_at`, `updated_at`) VALUES
-(1, 'Bimo Nugraha', 'bimonugraha@gmail.com', NULL, '086712345677', 'Jl. HOS Cokroaminoto', '$2y$12$e0havwPSqxeviIvmIqIyaO5.CQ1cFm2mzhEWPkk0/Vuy7bO7BrsdS', NULL, NULL, 'manual', 0, '2025-01-05 05:43:21', '2025-01-05 05:43:21'),
-(2, 'Muhammad Aidil Rahman', 'aidilrahman@gmail.com', NULL, '086712345678', 'Jl. HOS Cokroaminoto', '$2y$12$qKe0/rs.pHDUy8e3Qd4g0eIXm/659Fh85gnDiI9a5/RijXzQfy.iO', NULL, NULL, 'manual', 0, '2025-01-05 05:43:21', '2025-01-05 05:43:21'),
-(3, 'Evan Marsandi', 'evanmarsandi@gmail.com', NULL, '086712345678', 'Jl. HOS Cokroaminoto', '$2y$12$7qD7es2U3l8VQucB.3/VtODhnMmFhaWPZ7AI2P/LzlOJLlRcMsjlG', NULL, NULL, 'manual', 0, '2025-01-05 05:43:22', '2025-01-05 05:43:22');
-
 -- --------------------------------------------------------
 
 --
@@ -337,7 +360,7 @@ CREATE TABLE `wedding_packages` (
   `total_price` int(11) NOT NULL,
   `payment_proof` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `order_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` enum('Pending','Payment','Confirmed','Cancelled','Reserved') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Pending',
+  `status` enum('Pending','Payment','On Process','Cancelled','Reserved') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Pending',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -518,7 +541,7 @@ ALTER TABLE `selfphoto_photobox_packages`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `wedding_packages`

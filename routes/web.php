@@ -93,6 +93,7 @@ Route::middleware('auth')->group(function () {
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('reservations', ReservationManagementController::class);
+    Route::delete('admin/reservations/{reservation}', [ReservationManagementController::class, 'destroy'])->name('admin.reservations.destroy');
     Route::resource('galleries', GalleryManagementController::class);
     Route::resource('photographers', PhotographerManagementController::class);
     Route::resource('users', UsersManagementController::class);
